@@ -1,0 +1,34 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+// Variables
+@import 'variables';
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+@include media-breakpoint-up(xs) {}
+
+@include media-breakpoint-up(md) {
+    #introduction {
+        min-height: 800px;
+    }
+}
+
+#introduction {
+    background-image: url('../images/eve.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.bg-none {
+    background: transparent;
+}
+.font-big {
+    font-size: 1.3em;
+}
+.font-bigger {
+    font-size: 1.6em;
+}
+.font-bigly {
+    font-size: 2em;
+}
+

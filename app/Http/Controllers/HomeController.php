@@ -9,7 +9,6 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $this->test();
         return view('home');
     }
 }

@@ -4,20 +4,26 @@ namespace Mesa\Http\Api;
 
 class EsiLocations extends EsiClient
 {
-    protected $endpoint = '/latest/universe/';
 
-    public function getData(string $type, int $id = null)
+    protected $type;
+
+    public function getData(int $id = null)
     {
-        $this->endpoint .= $type;
+        $endpoint = '/latest/universe/' . $this->type;
         if (!is_null($id)) {
-            $this->endpoint .= '/' . $id;
+            $endpoint .= '/' . $id;
         }
 
-        return $this->fetch($this->endpoint);
+        return $this->fetch($endpoint);
     }
 
-    public function mapToModel(string $type, $data, $attributes)
+    /**
+     * @param mixed $type
+     * @return EsiLocations
+     */
+    public function setType($type)
     {
-
+        $this->type = $type;
+        return $this;
     }
 }

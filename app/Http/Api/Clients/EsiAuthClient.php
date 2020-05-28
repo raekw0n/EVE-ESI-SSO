@@ -1,6 +1,6 @@
 <?php
 
-namespace Mesa\Http\Api;
+namespace Mesa\Http\Api\Clients;
 
 use GuzzleHttp\Client;
 use Illuminate\Support\Str;

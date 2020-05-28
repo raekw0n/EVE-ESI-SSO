@@ -2,6 +2,8 @@
 
 namespace Mesa\Http\Api;
 
+use Mesa\Http\Api\Clients\EsiClient;
+
 class EsiLocations extends EsiClient
 {
 

@@ -3,7 +3,7 @@
 namespace Mesa\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Mesa\Http\Api\EsiAuthClient;
+use Mesa\Http\Api\Clients\EsiAuthClient;
 use GuzzleHttp\Exception\GuzzleException;
 
 /**

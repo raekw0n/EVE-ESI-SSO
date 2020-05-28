@@ -1,6 +1,6 @@
 <?php
 
-namespace Mesa\Http\Api;
+namespace Mesa\Http\Api\Clients;
 
 interface ClientInterface
 {

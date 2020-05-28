@@ -2,6 +2,8 @@
 
 namespace Mesa\Http\Api;
 
+use Mesa\Http\Api\Clients\EsiAuthClient;
+
 class EsiCharacter extends EsiAuthClient
 {
     private $token;

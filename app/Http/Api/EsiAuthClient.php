@@ -12,13 +12,17 @@ class EsiAuthClient extends AbstractClient
     /** @var EsiClient $client */
     protected $client;
 
+    /** @var string $base */
     protected $base = 'https://login.eveonline.com';
 
+    /** @var mixed $clientId */
     protected $clientId;
+
+    /** @var mixed $secretKey */
     protected $secretKey;
 
+    /** @var string $code */
     protected $code;
-    protected $state;
 
     public function __construct()
     {
@@ -34,14 +38,18 @@ class EsiAuthClient extends AbstractClient
      * Redirect to login to obtain an authorization token.
      *
      * return mixed
+     * @param array $scopes
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function authorize()
+    public function authorize(array $scopes = [])
     {
-        return redirect($this->base.'/v2/oauth/authorize?response_type=code&redirect_uri='.
-            urlencode(route('esi.sso.callback')) .
-            '&client_id=' . $this->clientId .
-            '&state=' . Str::random(16)
-        );
+        $url = $this->base . '/v2/oauth/authorize?response_type=code';
+        $url .= '&redirect_uri=' . urlencode(route('esi.sso.callback'));
+        $url .= '&client_id=' . $this->clientId;
+        $url .= !empty($scopes) ? $this->buildScopeQueryString($scopes) : '';
+        $url .= '&state=' . Str::random();
+
+        return redirect($url);
     }
 
     /**
@@ -97,5 +105,24 @@ class EsiAuthClient extends AbstractClient
         ]]);
 
         return json_decode($response->getBody()->getContents());
+    }
+
+    /**
+     * Generate query string for ESI scopes.
+     *
+     * @param array $scopes
+     * @return string
+     */
+    private function buildScopeQueryString(array $scopes)
+    {
+        $query = '&scope=';
+        $count = count($scopes);
+        $delim = '%20';
+        foreach ($scopes as $name => $key) {
+            if (--$count <= 0) $delim = null;
+            $query .= $key . $delim;
+        }
+
+        return $query;
     }
 }

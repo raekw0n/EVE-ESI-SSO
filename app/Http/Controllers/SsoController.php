@@ -60,6 +60,8 @@ class SsoController extends Controller
             session()->put('character', $character);
         }
 
+        dd(session()->get('character'));
+
         return response()->json(['error' => null]);
     }
 }

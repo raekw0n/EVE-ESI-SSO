@@ -7,7 +7,7 @@ use GuzzleHttp\Client;
 /**
  * ESI client.
  */
-class EsiClient extends AbstractClient
+class EsiClient implements ClientInterface
 {
     /** @var EsiClient $client */
     protected $client;
@@ -49,7 +49,7 @@ class EsiClient extends AbstractClient
      */
     public function fetch(string $endpoint = '', string $method = 'GET')
     {
-        $endpoint .= $this->server . $this->query;
+        $endpoint .= $this->server;
         $response = $this->client->request($method, $endpoint);
         if ($response && $response->getStatusCode() === 200) {
             return json_decode($response->getBody()->getContents());

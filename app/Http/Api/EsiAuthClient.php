@@ -2,15 +2,14 @@
 
 namespace Mesa\Http\Api;
 
-use Mesa\Auth\Scopes;
 use GuzzleHttp\Client;
-use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Http\Request;
 
 /**
  * ESI auth client.
  */
-class EsiAuthClient extends AbstractClient
+class EsiAuthClient implements ClientInterface
 {
     /** @var string $server */
     protected $server = 'tranquility';

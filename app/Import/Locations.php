@@ -2,19 +2,33 @@
 
 namespace Mesa\Import;
 
+use Exception;
 use Mesa\Http\Api\EsiLocations;
 use Mesa\{Regions, Constellations, Systems, Stargates, Stations};
 
-class LocationsImporter
+/**
+ * Locations Importer
+ */
+class Locations extends AbstractImporter
 {
-
+    /** @var EsiLocations $esi; */
     private $esi;
 
+    /**
+     * Locations constructor.
+     *
+     * @return void
+     */
     public function __construct()
     {
         $this->esi = new EsiLocations();
     }
 
+    /**
+     * Import regions.
+     *
+     * @return array
+     */
     public function regions() {
 
         $this->esi->setType('regions');
@@ -40,6 +54,11 @@ class LocationsImporter
         return ['regions' => $count, 'imported' => $counter];
     }
 
+    /**
+     * Import constellations.
+     *
+     * @return array
+     */
     public function constellations() {
         $this->esi->setType('constellations');
 
@@ -64,6 +83,11 @@ class LocationsImporter
         return ['constellations' => $count, 'imported' => $counter];
     }
 
+    /**
+     * Import systems.
+     *
+     * @return array
+     */
     public function systems() {
         $this->esi->setType('systems');
 
@@ -90,8 +114,15 @@ class LocationsImporter
         return ['systems' => $count, 'imported' => $counter];
     }
 
+    /**
+     * Import stargates.
+     *
+     */
     public function stargates() {}
 
+    /**
+     * Import stations.
+     *
+     */
     public function stations() {}
-
 }

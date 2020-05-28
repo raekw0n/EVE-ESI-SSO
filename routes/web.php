@@ -15,4 +15,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'HomeController@index')->name('home');
 
-Route::post('/import/{type?}', 'ImportController@import');
+Route::group(['prefix' => 'locations'], function() {
+    Route::get('/{type}/{id?}', 'LocationsController@get')->name('locations.get');
+});
+
+Route::post('/import/{type}/{subtype}', 'ImportController@import')->name('import');

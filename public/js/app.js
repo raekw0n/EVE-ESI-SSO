@@ -50133,7 +50133,7 @@ window.Toast = sweetalert2__WEBPACK_IMPORTED_MODULE_7___default.a.mixin({
 });
 window.Popper = popper_js__WEBPACK_IMPORTED_MODULE_0__["default"];
 window.$ = window.jQuery = jquery__WEBPACK_IMPORTED_MODULE_1___default.a;
-_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_4__["library"].add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__["faArrowLeft"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__["faArrowRight"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__["faCompass"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__["faPlus"]);
+_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_4__["library"].add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__["faArrowLeft"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__["faArrowRight"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__["faCompass"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__["faPlus"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_5__["faTruck"]);
 _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_4__["dom"].watch();
 window._ = lodash__WEBPACK_IMPORTED_MODULE_2___default.a;
 window.axios = axios__WEBPACK_IMPORTED_MODULE_3___default.a;

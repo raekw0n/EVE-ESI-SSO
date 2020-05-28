@@ -3,7 +3,7 @@ import $ from 'jquery';
 import _ from 'lodash';
 import axios from 'axios';
 import { library, dom } from '@fortawesome/fontawesome-svg-core';
-import { faArrowLeft, faArrowRight, faCompass, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft, faArrowRight, faCompass, faPlus, faTruck } from '@fortawesome/free-solid-svg-icons';
 import 'bootstrap';
 import Swal from 'sweetalert2';
 
@@ -23,7 +23,7 @@ window.Toast = Swal.mixin({
 window.Popper = Popper;
 window.$ = window.jQuery = $;
 
-library.add(faArrowLeft, faArrowRight, faCompass, faPlus);
+library.add(faArrowLeft, faArrowRight, faCompass, faPlus, faTruck);
 dom.watch();
 
 window._ = _;

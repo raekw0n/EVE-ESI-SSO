@@ -35,6 +35,9 @@
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('apply') }}"><i class="fas fa-plus"></i> Apply Now</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('haulage') }}"><i class="fas fa-truck"></i> Haulage Quote</a>
+            </li>
         </ul>
         <ul class="navbar-nav ml-auto">
 {{--            @esiguest--}}

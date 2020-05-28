@@ -35,7 +35,7 @@
                     negotiate more contracts with sov-holding alliances.
                 </p>
                 <p>
-                    <a class="btn btn-outline-dark" href="#">FAQs / Get a quote »</a>
+                    <a class="btn btn-outline-dark" href="{{ route('haulage') }}">FAQs / Get a quote »</a>
                 </p>
             </div>
             <div class="col-md-4">
@@ -48,7 +48,7 @@
                     popping up in the near future, all with 0% tax, so watch this space.
                 </p>
                 <p>
-                    <a class="btn btn-outline-dark" href="#">FAQs / Get a quote »</a>
+                    <a class="btn btn-outline-dark" href="{{ route('reprocessing') }}">FAQs / Get a quote »</a>
                 </p>
             </div>
             <div class="col-md-4">
@@ -61,7 +61,7 @@
                     transporting your goods to Jita to sell for profit.
                 </p>
                 <p>
-                    <a class="btn btn-outline-dark" href="#">FAQs / Get a quote »</a>
+                    <a class="btn btn-outline-dark" href="{{ route('manufacturing') }}">FAQs / Get a quote »</a>
                 </p>
             </div>
         </div>

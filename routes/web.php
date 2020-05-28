@@ -15,6 +15,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'HomeController@index')->name('home');
 
+Route::group(['prefix' => 'services'], function() {
+    Route::get('/haulage', 'PageController@haulage')->name('haulage');
+    Route::get('/reprocessing', 'PageController@reprocessing')->name('reprocessing');
+    Route::get('/manufacturing', 'PageController@manufacturing')->name('manufacturing');
+});
+
 Route::get('/apply', 'ApplicationController@index')->name('apply');
 Route::post('/apply/submit', 'ApplicationController@submit')->name('apply.submit');
 

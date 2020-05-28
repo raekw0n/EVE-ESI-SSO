@@ -29,7 +29,13 @@ class SsoController extends Controller
      */
     public function login()
     {
-        return $this->esi->authorize();
+        $scopes = [
+            'esi-characters.read_contacts.v1',
+            'esi-skills.read_skills.v1',
+            'esi-characterstats.read.v1'
+        ];
+
+        return $this->esi->authorize($scopes);
     }
 
     /**

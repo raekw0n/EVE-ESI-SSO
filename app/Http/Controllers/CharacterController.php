@@ -19,7 +19,11 @@ class CharacterController extends Controller
                 return $next($request);
             }
 
-            return redirect(route('esi.sso.login'));
+            return redirect(route('esi.sso.login', [
+                'esi-characters.read_contacts.v1',
+                'esi-skills.read_skills.v1',
+                'esi-characterstats.read.v1'
+            ]));
         });
     }
 }

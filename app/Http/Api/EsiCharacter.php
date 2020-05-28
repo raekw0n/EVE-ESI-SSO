@@ -35,6 +35,7 @@ class EsiCharacter extends EsiAuthClient
         }
 
         $this->data[$this->id]['current_corporation'] = key($this->data[$this->id]['corporation_history']);
+        $this->data[$this->id]['contacts'] = $this->getContacts();
 
         return $this->data[$this->id];
     }
@@ -71,6 +72,18 @@ class EsiCharacter extends EsiAuthClient
     private function getStandings()
     {
         return $this->fetch('/latest/characters/'.$this->id.'/standings/');
+    }
+
+    /**
+     * Get character contacts.
+     *
+     * @scope esi-characters.read_contacts.v1
+     * @return bool|mixed
+     *
+     */
+    private function getContacts()
+    {
+        return $this->fetch('/latest/characters/'.$this->id.'/contacts/');
     }
 
     /**

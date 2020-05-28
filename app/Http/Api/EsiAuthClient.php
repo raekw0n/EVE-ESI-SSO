@@ -37,9 +37,9 @@ class EsiAuthClient extends AbstractClient
     public function authorize()
     {
         return redirect($this->base.'/v2/oauth/authorize?response_type=code&redirect_uri='.
-            urlencode('http://mesa-orbital.local/eveauth/callback').
-            '&client_id='.$this->clientId.
-            '&state='.Str::random(16)
+            urlencode(route('esi.sso.callback')) .
+            '&client_id=' . $this->clientId .
+            '&state=' . Str::random(16)
         );
     }
 
@@ -72,7 +72,9 @@ class EsiAuthClient extends AbstractClient
             ]
         ]);
 
-        $user = json_decode($response);
+        $user = json_decode($response->getBody()->getContents());
+
+        dd($user);
 
         // TODO WIP modify users table to store tokens
     }

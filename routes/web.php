@@ -20,8 +20,8 @@ Route::group(['prefix' => 'locations'], function() {
 });
 
 Route::group(['prefix' => 'eveauth'], function() {
-    Route::get('login', 'SsoController@login')->name('esi.login');
-    Route::get('callback', 'SsoController@callback')->name('esi.callback');
+    Route::get('login', 'SsoController@login')->name('esi.sso.login');
+    Route::get('callback', 'SsoController@callback')->name('esi.sso.callback');
 });
 
 Route::post('/import/{type}/{subtype}', 'ImportController@import')->name('import');

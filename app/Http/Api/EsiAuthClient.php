@@ -2,6 +2,7 @@
 
 namespace Mesa\Http\Api;
 
+use Mesa\Auth\Scopes;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -47,6 +48,9 @@ class EsiAuthClient extends AbstractClient
      * Callback method to receive the authorization code from EVE SSO
      *
      * @param Request $request
+     * @return mixed
+     *
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function callback(Request $request)
     {
@@ -71,6 +75,26 @@ class EsiAuthClient extends AbstractClient
                 'code' => $this->code,
             ]
         ]);
+
+        return json_decode($response->getBody()->getContents());
+    }
+
+    /**
+     * Verify login and return character information.
+     *
+     * @return bool|mixed
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
+    public function verify()
+    {
+        if (!session()->exists('access_token')) {
+            return false;
+        }
+
+        $response = $this->client->request('GET', '/oauth/verify', [
+            'headers' => [
+            'Authorization' => 'Bearer ' . session()->get('access_token')
+        ]]);
 
         return json_decode($response->getBody()->getContents());
     }

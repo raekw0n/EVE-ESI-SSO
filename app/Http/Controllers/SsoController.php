@@ -2,9 +2,14 @@
 
 namespace Mesa\Http\Controllers;
 
+use Log;
 use Illuminate\Http\Request;
 use Mesa\Http\Api\EsiAuthClient;
+use GuzzleHttp\Exception\GuzzleException;
 
+/**
+ * ESI SSO Controller
+ */
 class SsoController extends Controller
 {
     /** @var EsiAuthClient  */
@@ -41,10 +46,15 @@ class SsoController extends Controller
             session()->put('access_token', $auth->access_token);
             session()->put('refresh_token', $auth->refresh_token);
 
-            return $this->verify();
+            try {
+                return $this->verify();
+            } catch (GuzzleException $e) {
+                Log::debug($e->getMessage());
+                return response()->json(['error' => 'An unexpected error occurred, please try again.'], 500);
+            }
         }
 
-        return response()->json(['error' => 'Could not retrieve access token.'], 500);
+        return response()->json(['error' => 'Could not retrieve access token.'], 400);
     }
 
     /**

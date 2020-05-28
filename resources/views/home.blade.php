@@ -4,19 +4,21 @@
 @endsection
 
 @section('content')
-    <div class="container-fluid text-light" id="introduction">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="jumbotron bg-none">
-                    <h1>
-                        Welcome to Mesa Orbital
-                    </h1>
-                    <p class="font-big">
-                        We're a high-security industry & logistics corporation operating in New Eden.
-                    </p>
-                    <p>
-                        <a class="btn btn-outline-light btn-large" href="#">Learn more <i class="ml-1 fas fa-arrow-right"></i></a>
-                    </p>
+    <div id="introduction">
+        <div class="container-fluid text-light">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="jumbotron bg-none">
+                        <h1>
+                            Welcome to Mesa Orbital
+                        </h1>
+                        <p class="font-big">
+                            We're a high-security industry & logistics corporation operating in New Eden.
+                        </p>
+                        <p>
+                            <a class="btn btn-outline-light btn-large" href="{{ route('apply') }}">Apply to Join<i class="ml-1 fas fa-arrow-right"></i></a>
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>

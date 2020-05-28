@@ -17,15 +17,9 @@
         @endauth
         @yield('content')
     </main>
-    <footer class="sticky-footer">
+    <footer class="footer">
         <div class="container">
-            <div class="row">
-                <div class="col-md-8">
-                    <small>Copyright © 2020 Mesa Orbital.</small>
-                </div>
-                <div class="col-md-4">
-                </div>
-            </div>
+            <span class="text-muted">Copyright © {{ date('Y') }} Mesa Orbital. All Rights Reserved</span>
         </div>
     </footer>
 </div>

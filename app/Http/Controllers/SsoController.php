@@ -41,17 +41,14 @@ class SsoController extends Controller
      */
     public function callback(Request $request)
     {
-        $auth = $this->esi->callback($request);
-        if (isset($auth->access_token)) {
-            session()->put('access_token', $auth->access_token);
-            session()->put('refresh_token', $auth->refresh_token);
+        try {
+            $auth = $this->esi->callback($request);
+            session()->put('character.access_token', $auth->access_token);
+            session()->put('character.refresh_token', $auth->refresh_token);
 
-            try {
-                return $this->verify();
-            } catch (GuzzleException $e) {
-                Log::debug($e->getMessage());
-                return response()->json(['error' => 'An unexpected error occurred, please try again.'], 500);
-            }
+            return $this->verify();
+        } catch (GuzzleException $e) {
+            Log::error($e->getMessage());
         }
 
         return response()->json(['error' => 'Could not retrieve access token.'], 400);
@@ -61,17 +58,22 @@ class SsoController extends Controller
      * Verify login and return character information.
      *
      * @return \Illuminate\Http\JsonResponse
-     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function verify()
     {
-        $character = $this->esi->verify();
-        if (isset($character->CharacterID)) {
-            session()->put('character', $character);
+        try {
+            $character = $this->esi->verify();
+            session()->put('character.info', $character);
+
+            return response()->json([
+                'result' => 'Character successfully verified',
+                'data' => session()->get('character')
+            ]);
+
+        } catch (GuzzleException $e) {
+            Log::error($e->getMessage());
         }
 
-        dd(session()->get('character'));
-
-        return response()->json(['error' => null]);
+        return response()->json(['error' => 'An unexpected error occurred, please try again.'], 500);
     }
 }

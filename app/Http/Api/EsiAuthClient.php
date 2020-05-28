@@ -95,13 +95,13 @@ class EsiAuthClient extends AbstractClient
      */
     public function verify()
     {
-        if (!session()->exists('access_token')) {
+        if (!session()->exists('character.access_token')) {
             return false;
         }
 
         $response = $this->client->request('GET', '/oauth/verify', [
             'headers' => [
-            'Authorization' => 'Bearer ' . session()->get('access_token')
+            'Authorization' => 'Bearer ' . session()->get('character.access_token')
         ]]);
 
         return json_decode($response->getBody()->getContents());

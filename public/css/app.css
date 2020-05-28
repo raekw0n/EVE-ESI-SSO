@@ -10934,10 +10934,47 @@ a.text-dark:focus {
   }
 }
 
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
 #introduction {
   background-image: url(/images/eve.png?50326951ed88fe0d3c662902401eb34b);
   background-repeat: no-repeat;
   background-size: cover;
+}
+
+#application {
+  background-image: url(/images/eve.png?50326951ed88fe0d3c662902401eb34b);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+#application .card {
+  border: 1px solid white;
+  background-color: rgba(100, 100, 100, 0.3);
+  color: white;
+}
+
+#application .card label {
+  font-weight: bold;
+}
+
+#application .card textarea {
+  background: rgba(100, 100, 100, 0.2);
+  color: white;
+}
+
+.filter {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: url(/images/rect_1.png?f25c7470c9a5ac7669a96fa1908a5f1b);
 }
 
 .bg-none {
@@ -10954,5 +10991,14 @@ a.text-dark:focus {
 
 .font-bigly {
   font-size: 2em;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 60px;
+  line-height: 60px;
+  background-color: #f5f5f5;
 }
 

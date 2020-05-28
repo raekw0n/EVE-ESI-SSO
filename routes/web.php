@@ -15,6 +15,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'HomeController@index')->name('home');
 
+Route::get('/apply', 'ApplicationController@index')->name('apply');
+Route::post('/apply/submit', 'ApplicationController@submit')->name('apply.submit');
+
 Route::group(['prefix' => 'locations'], function() {
     Route::get('/{type}/{id?}', 'LocationsController@get')->name('locations.get');
 });

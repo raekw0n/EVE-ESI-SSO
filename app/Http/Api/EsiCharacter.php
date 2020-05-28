@@ -4,18 +4,31 @@ namespace Mesa\Http\Api;
 
 use Mesa\Http\Api\Clients\EsiAuthClient;
 
+/**
+ * ESI Character Management.
+ */
 class EsiCharacter extends EsiAuthClient
 {
+    /** @var mixed $token */
     private $token;
 
+    /** @var mixed $id */
     public $id;
 
+    /** @var mixed $name */
     private $name;
 
+    /** @var string $base */
     protected $base = 'https://esi.evetech.net';
 
+    /** @var array $data */
     protected $data = [];
 
+    /**
+     * EsiCharacter constructor.
+     *
+     * @param $character
+     */
     public function __construct($character)
     {
         $this->token = $character['access_token'];
@@ -26,6 +39,12 @@ class EsiCharacter extends EsiAuthClient
         parent::__construct();
     }
 
+    /**
+     * Obtain information required for character applications.
+     *
+     * @return mixed
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
     public function getInfoRequiredForApplication()
     {
         $this->data[$this->id] = ['name' => $this->name];
@@ -47,6 +66,7 @@ class EsiCharacter extends EsiAuthClient
      *
      * @scope none
      * @return bool|mixed
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     private function getPortrait()
     {
@@ -59,6 +79,7 @@ class EsiCharacter extends EsiAuthClient
      *
      * @scope none
      * @return bool|mixed
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     private function getCorporationHistory()
     {
@@ -70,6 +91,7 @@ class EsiCharacter extends EsiAuthClient
      *
      * @scope esi-characters.read_standings.v1
      * @return bool|mixed
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     private function getStandings()
     {
@@ -81,7 +103,7 @@ class EsiCharacter extends EsiAuthClient
      *
      * @scope esi-characters.read_contacts.v1
      * @return bool|mixed
-     *
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     private function getContacts()
     {
@@ -93,6 +115,7 @@ class EsiCharacter extends EsiAuthClient
      *
      * @scope esi-mail.read_mail.v1
      * @return bool|mixed
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     private function getMail()
     {

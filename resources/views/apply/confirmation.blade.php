@@ -10,12 +10,11 @@
                 <div class="col-md-12">
                     <div class="card filter">
                         <div class="card-header">
-                            Application Received!
+                            Application received for {{ $character }}
                         </div>
                         <div class="card-body">
                             <p>
-                                Success! your application has been received. Please keep an eye on your EVEmail,
-                                we'll send you an invite or an update shortly.
+                                {{ $message }}
                             </p>
                         </div>
                     </div>

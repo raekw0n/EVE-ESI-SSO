@@ -14,15 +14,12 @@ class CharacterController extends Controller
     public function __construct()
     {
         $this->middleware(function($request, $next) {
-            $this->character = new EsiCharacter(session()->get('character'));
-            return $next($request);
+            if(session()->exists('character')) {
+                $this->character = new EsiCharacter(session()->get('character'));
+                return $next($request);
+            }
+
+            return redirect(route('esi.sso.login'));
         });
-    }
-
-    public function getInfoRequiredForApplication()
-    {
-        $data = $this->character->getInfoRequiredForApplication();
-
-        dd($data);
     }
 }

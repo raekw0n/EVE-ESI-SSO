@@ -37,13 +37,13 @@
             </li>
         </ul>
         <ul class="navbar-nav ml-auto">
-            @esiguest
+{{--            @esiguest--}}
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('esi.sso.login') }}">
                         <img class="img-fluid" src="{{ asset('images/eve-sso-login.png') }}" alt="">
                     </a>
                 </li>
-            @endesiguest
+{{--            @endesiguest--}}
         </ul>
     </div>
 </nav>

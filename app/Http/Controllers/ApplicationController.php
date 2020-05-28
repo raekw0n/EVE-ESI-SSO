@@ -6,9 +6,11 @@ use Illuminate\Http\Request;
 use Mesa\Application;
 use Mesa\Http\Api\EsiCharacter;
 
+/**
+ * Application Constructor.
+ */
 class ApplicationController extends Controller
 {
-
     /** @var mixed $character */
     private $character;
 
@@ -27,16 +29,15 @@ class ApplicationController extends Controller
         });
     }
 
+    /**
+     * Render application page.
+     *
+     * @return mixed
+     */
     public function index()
     {
-        return view('apply');
+        return view('apply.form');
     }
-
-    /**
-     * Receive character information from SSO authentication flow.
-     */
-    public function callback(Request $request)
-    {}
 
     /**
      * Submit application.
@@ -44,6 +45,13 @@ class ApplicationController extends Controller
     public function submit(Request $request)
     {
         $information = $this->character->getInfoRequiredForApplication();
+
+        if(Application::where('character_name', $information['name'])->first()) {
+            return view('apply.confirmation', [
+                'character' => $information['name'],
+                'message' => 'We have already received an application for ' . $information['name'] . ', please contact Solomon Kaldari in-game for assistance.'
+            ]);
+        }
 
         $application = new Application();
 
@@ -60,11 +68,9 @@ class ApplicationController extends Controller
             return response()->json(['error' => 'There was an error with your application, please try again.']);
         }
 
-        return view('apply.confirmation', ['character' => $information]);
-    }
-
-    public function runSecurityChecks(array $data)
-    {
-
+        return view('apply.confirmation', [
+            'character' => $information['name'],
+            'message' => 'Success! your application has been received. Please keep an eye on your EVEmail, we\'ll send you an invite or an update shortly.'
+        ]);
     }
 }

@@ -7,8 +7,14 @@ use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
+/**
+ * ESI auth client.
+ */
 class EsiAuthClient extends AbstractClient
 {
+    /** @var string $server */
+    protected $server = 'tranquility';
+
     /** @var EsiClient $client */
     protected $client;
 
@@ -24,7 +30,12 @@ class EsiAuthClient extends AbstractClient
     /** @var string $code */
     protected $code;
 
-    public function __construct()
+    /**
+     * EsiAuthClient constructor.
+     *
+     * @param string|null $server
+     */
+    public function __construct(string $server = null)
     {
         $this->clientId = config('eve.esi.client_id');
         $this->secretKey = config('eve.esi.secret_key');
@@ -32,6 +43,32 @@ class EsiAuthClient extends AbstractClient
         $this->client = new Client([
             'base_uri' => $this->base
         ]);
+
+        $server = $server ?? config('eve.esi.server');
+        $this->server = '?datasource=' . $server;
+    }
+
+    /**
+     * Fetch data from endpoints that require authentication.
+     *
+     * @param string $endpoint
+     * @param string $method
+     * @return bool|mixed
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
+    public function fetch(string $endpoint = '', string $method = 'GET')
+    {
+        $endpoint .= $this->server;
+        $response = $this->client->request($method, $endpoint, [
+            'headers' => [
+                'Authorization' => 'Bearer ' . session()->get('character.access_token')
+            ]
+        ]);
+        if ($response && $response->getStatusCode() === 200) {
+            return json_decode($response->getBody()->getContents());
+        } else {
+            return false;
+        }
     }
 
     /**
@@ -101,8 +138,9 @@ class EsiAuthClient extends AbstractClient
 
         $response = $this->client->request('GET', '/oauth/verify', [
             'headers' => [
-            'Authorization' => 'Bearer ' . session()->get('character.access_token')
-        ]]);
+                'Authorization' => 'Bearer ' . session()->get('character.access_token')
+            ]
+        ]);
 
         return json_decode($response->getBody()->getContents());
     }

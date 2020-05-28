@@ -64,6 +64,7 @@ class SsoController extends Controller
         try {
             $character = $this->esi->verify();
             session()->put('character.info', $character);
+            session()->put('character.id', $character->CharacterID);
 
             return response()->json([
                 'result' => 'Character successfully verified',

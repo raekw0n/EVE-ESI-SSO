@@ -4,6 +4,9 @@ namespace Mesa\Http\Api;
 
 use GuzzleHttp\Client;
 
+/**
+ * ESI client.
+ */
 class EsiClient extends AbstractClient
 {
     /** @var EsiClient $client */
@@ -36,6 +39,14 @@ class EsiClient extends AbstractClient
         $this->server = '?datasource=' . $server;
     }
 
+    /**
+     * fetch data from public endpoints.
+     *
+     * @param string $endpoint
+     * @param string $method
+     * @return bool|mixed
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
     public function fetch(string $endpoint = '', string $method = 'GET')
     {
         $endpoint .= $this->server . $this->query;

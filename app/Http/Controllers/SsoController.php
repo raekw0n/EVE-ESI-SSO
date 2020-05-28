@@ -2,7 +2,6 @@
 
 namespace Mesa\Http\Controllers;
 
-use Log;
 use Illuminate\Http\Request;
 use Mesa\Http\Api\EsiAuthClient;
 use GuzzleHttp\Exception\GuzzleException;
@@ -38,43 +37,30 @@ class SsoController extends Controller
      *
      * @param Request $request
      * @return mixed
+     * @throws GuzzleException
      */
     public function callback(Request $request)
     {
-        try {
-            $auth = $this->esi->callback($request);
-            session()->put('character.access_token', $auth->access_token);
-            session()->put('character.refresh_token', $auth->refresh_token);
+        $auth = $this->esi->callback($request);
+        session()->put('character.access_token', $auth->access_token);
+        session()->put('character.refresh_token', $auth->refresh_token);
 
-            return $this->verify();
-        } catch (GuzzleException $e) {
-            Log::error($e->getMessage());
-        }
-
-        return response()->json(['error' => 'Could not retrieve access token.'], 400);
+        return $this->verify();
     }
 
     /**
      * Verify login and return character information.
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return mixed
+     * @throws GuzzleException
      */
     public function verify()
     {
-        try {
-            $character = $this->esi->verify();
-            session()->put('character.info', $character);
-            session()->put('character.id', $character->CharacterID);
+        $character = $this->esi->verify();
+        session()->put('character.info', $character);
+        session()->put('character.id', $character->CharacterID);
 
-            return response()->json([
-                'result' => 'Character successfully verified',
-                'data' => session()->get('character')
-            ]);
 
-        } catch (GuzzleException $e) {
-            Log::error($e->getMessage());
-        }
-
-        return response()->json(['error' => 'An unexpected error occurred, please try again.'], 500);
+        return redirect(route('home'))->with('logged_in', true);
     }
 }

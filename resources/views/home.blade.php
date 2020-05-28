@@ -69,4 +69,14 @@
 @endsection
 
 @section('additional_scripts')
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', () => {
+            @if(session('logged_in'))
+                Toast.fire({
+                    icon: 'success',
+                    title: "Character successfully authenticated."
+                });
+            @endif()
+        });
+    </script>
 @endsection

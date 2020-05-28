@@ -20,6 +20,13 @@ class ApplicationController extends Controller
     /**
      * Submit application.
      */
-    public function submit()
-    {}
+    public function submit(Request $request)
+    {
+        return $this->runSecurityChecks($request->all());
+    }
+
+    public function runSecurityChecks(array $all)
+    {
+
+    }
 }

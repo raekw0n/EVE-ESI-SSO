@@ -72,10 +72,6 @@ class EsiAuthClient extends AbstractClient
             ]
         ]);
 
-        $user = json_decode($response->getBody()->getContents());
-
-        dd($user);
-
-        // TODO WIP modify users table to store tokens
+        return json_decode($response->getBody()->getContents());
     }
 }

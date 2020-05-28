@@ -38,10 +38,9 @@
         </ul>
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                <a class="nav-link" href="#"><i class="mr-1 fas fa-plus text-dark"></i> Apply Now!</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link disabled" href="#"><i class="mr-1 fas fa-compass text-dark"></i> Corp Services</a>
+                <a class="nav-link" href="{{ route('esi.sso.login') }}">
+                    <img class="img-fluid" src="{{ asset('images/eve-sso-login.png') }}" alt="">
+                </a>
             </li>
         </ul>
     </div>

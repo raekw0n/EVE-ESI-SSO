@@ -46945,6 +46945,14 @@ module.exports = function(module) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _bootstrap__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
+axios.interceptors.request.use(function (config) {
+  $('#loading').show();
+  return config;
+});
+axios.interceptors.response.use(function (response) {
+  $('#loading').hide();
+  return response;
+});
 
 /***/ }),
 
@@ -47003,8 +47011,8 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /home/chris/workspace/projects/mesa-orbital/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /home/chris/workspace/projects/mesa-orbital/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /home/vagrant/mesa-orbital/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /home/vagrant/mesa-orbital/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

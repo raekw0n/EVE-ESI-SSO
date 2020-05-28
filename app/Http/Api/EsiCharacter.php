@@ -6,9 +6,9 @@ class EsiCharacter extends EsiAuthClient
 {
     private $token;
 
-    private $id;
+    public $id;
 
-    private $character;
+    private $name;
 
     protected $base = 'https://esi.evetech.net';
 
@@ -19,18 +19,14 @@ class EsiCharacter extends EsiAuthClient
         $this->token = $character['access_token'];
         $this->id = $character['id'];
 
-        $this->character = $character;
+        $this->name = $character['name'];
 
         parent::__construct();
     }
 
     public function getInfoRequiredForApplication()
     {
-        $this->data[$this->id] = [
-            'character' => $this->character['info']->CharacterName,
-            'portrait' => $this->getPortrait(),
-            'standings' => $this->getStandings(),
-        ];
+        $this->data[$this->id] = ['name' => $this->name];
 
         $corpHistory = $this->getCorporationHistory();
         foreach ($corpHistory as $corp) {
@@ -38,7 +34,9 @@ class EsiCharacter extends EsiAuthClient
             $this->data[$this->id]['corporation_history'][$info->name] = ['since' => $corp->start_date];
         }
 
-        return $this->data;
+        $this->data[$this->id]['current_corporation'] = key($this->data[$this->id]['corporation_history']);
+
+        return $this->data[$this->id];
     }
 
     /**

@@ -57,8 +57,8 @@ class SsoController extends Controller
     public function verify()
     {
         $character = $this->esi->verify();
-        session()->put('character.info', $character);
         session()->put('character.id', $character->CharacterID);
+        session()->put('character.name', $character->CharacterName);
 
 
         return redirect(route('home'))->with('logged_in', true);

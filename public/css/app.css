@@ -10953,6 +10953,7 @@ body {
   background-image: url(/images/eve.png?50326951ed88fe0d3c662902401eb34b);
   background-repeat: no-repeat;
   background-size: cover;
+  min-height: 800px;
 }
 
 #application .card {

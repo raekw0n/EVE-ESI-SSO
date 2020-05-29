@@ -9,7 +9,7 @@ https://mesa-orbital.net
 * [Importing Data from the ESI](#importing-data)
 
 ## Working on
-* Connectivity with the EVE ESI.
+* Connectivity with the EVE Online API.
 * Development of route planner and freight calculator.
 * Development of the frontend corporation website.
 

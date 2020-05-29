@@ -73,3 +73,10 @@ The import controller will resolve and create an instance of `Locations`, and ca
 * Logic for handling each individual type of import is handled in each individual class (e.g. regions and constellations handled by `Location`, employment history and skill points handled by `Character` etc.)
 * Each class should be structured so the methods for importing can be resolved by the `subtype` parameter passed in the route  (e.g. `Location` should have a `regions()` method, `Character` should have a `skillPoints()` method etc.).
 * By following the two points above, you shouldn't need to override the `import()` method in any of the individual classes, you also shouldn't need to modify the `ImportController`'s logic.
+
+## Useful Links
+
+* [Crowd-sourced documentation](https://docs.esi.evetech.net/)
+* [EVE Swagger Interface](https://esi.evetech.net/ui/)
+* [EVE Developers](https://developers.eveonline.com/)
+

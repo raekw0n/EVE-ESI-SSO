@@ -2,10 +2,24 @@ import Popper from 'popper.js';
 import $ from 'jquery';
 import _ from 'lodash';
 import axios from 'axios';
-import { library, dom } from '@fortawesome/fontawesome-svg-core';
-import { faArrowLeft, faArrowRight, faCompass, faPlus, faTruck } from '@fortawesome/free-solid-svg-icons';
 import 'bootstrap';
 import Swal from 'sweetalert2';
+import {
+    library,
+    dom
+} from '@fortawesome/fontawesome-svg-core';
+import {
+    faArrowLeft,
+    faArrowRight,
+    faCompass,
+    faHome,
+    faPlus,
+    faTruck,
+    faWrench
+} from '@fortawesome/free-solid-svg-icons';
+
+library.add(faArrowLeft, faArrowRight, faCompass, faHome, faPlus, faTruck, faWrench);
+dom.watch();
 
 window.Toast = Swal.mixin({
     toast: true,
@@ -22,9 +36,6 @@ window.Toast = Swal.mixin({
 
 window.Popper = Popper;
 window.$ = window.jQuery = $;
-
-library.add(faArrowLeft, faArrowRight, faCompass, faPlus, faTruck);
-dom.watch();
 
 window._ = _;
 window.axios = axios;

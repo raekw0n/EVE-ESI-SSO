@@ -7,31 +7,20 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-{{--            <li class="nav-item">--}}
-{{--                <a class="nav-link" href="{{ route('home') }}">Home</a>--}}
-{{--            </li>--}}
-{{--            <li class="nav-item dropdown">--}}
-{{--                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"--}}
-{{--                   aria-haspopup="true" aria-expanded="false">--}}
-{{--                    About Mesa--}}
-{{--                </a>--}}
-{{--                <div class="dropdown-menu" aria-labelledby="navbarDropdown">--}}
-{{--                    <a class="dropdown-item" href="#">History</a>--}}
-{{--                    <a class="dropdown-item" href="#">Structure</a>--}}
-{{--                    <a class="dropdown-item" href="#">Activities</a>--}}
-{{--                </div>--}}
-{{--            </li>--}}
-{{--            <li class="nav-item dropdown">--}}
-{{--                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"--}}
-{{--                   aria-haspopup="true" aria-expanded="false">--}}
-{{--                    Services--}}
-{{--                </a>--}}
-{{--                <div class="dropdown-menu" aria-labelledby="navbarDropdown">--}}
-{{--                    <a class="dropdown-item" href="#">Haulage</a>--}}
-{{--                    <a class="dropdown-item" href="#">Manufacturing</a>--}}
-{{--                    <a class="dropdown-item" href="#">Reprocessing</a>--}}
-{{--                </div>--}}
-{{--            </li>--}}
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('home') }}"> <i class="fas fa-home"></i> Home</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-wrench"></i> Services
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{{ route('haulage') }}">Haulage</a>
+                    <a class="dropdown-item" href="{{ route('manufacturing') }}">Manufacturing</a>
+                    <a class="dropdown-item" href="{{ route('reprocessing') }}">Reprocessing</a>
+                </div>
+            </li>
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('apply') }}"><i class="fas fa-plus"></i> Apply Now</a>
             </li>

@@ -75,7 +75,7 @@ class EsiAuthClient implements ClientInterface
      *
      * return mixed
      * @param array $scopes
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @return mixed
      */
     public function authorize(array $scopes = [])
     {

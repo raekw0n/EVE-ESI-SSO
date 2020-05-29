@@ -27,7 +27,7 @@ method to redirect the user to `https://login.eveonline.com/v2/oauth/authorize` 
     - scope=`<space-delimited-scopes>`
     - state=`<random-string>`
     
-2. After the user logs in as a specific character the SSO sends a GET request to the callback URL provided containing a
+2. After the user logs in as a specific character EVE SSO sends a GET request to the callback URL provided containing a
 one use only authorization code that expires in 5 minutes.
 
 3. The callback url calls the `SsoController`'s `callback()` method which in turn calls the `EsiAuthClient`'s `callback()`,

@@ -25,15 +25,10 @@ method to redirect the user to `https://login.eveonline.com/v2/oauth/authorize` 
 2. After the user logs in as a specific character the SSO sends a GET request to the callback URL provided by
 your application containing a one use only authorization code that expires in 5 minutes.
 
-3. The callback method receives the authorization code, 
+[TBC]
 
-* After receiving the authorization code from EVE’s SSO, your application will make one more request to the SSO that contains this code.
 
-* If step 3 is successful, the SSO will respond with an access token whose lifetime is 20 minutes as well as a refresh token that can be used to get another access token in the future. This access token and refresh token will be valid for the user’s character using the scopes defined in step 2.
-
-* Your application can now include this access token when making a request to access authenticated resources as long as the correct scope applies to that ESI route.
-
-* Once the access token expires in 20 minutes, your application will send another request to the SSO using the refresh token from step 3 to get a new access token.
+![EVE SSO Flow](resources/images/eve-sso-flow.png)
 
 
 ### Importer

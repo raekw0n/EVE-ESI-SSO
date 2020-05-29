@@ -1,5 +1,11 @@
 # Mesa Orbital
-[WIP]
+
+
+## Table of contents
+
+* [Using SSO](#using-single-sign-on)
+  * [Authorization Flow](#authorization-flow)
+* [Importing Data from the ESI](#importing-data)
 
 ## Working on
 * Connectivity with the EVE ESI.
@@ -11,8 +17,6 @@
 ### Using Single Sign-On
 
 #### Authorization Flow
-
-* Your application will redirect a user to a login page provided by EVE’s SSO.
 
 1. The user navigates to `http://mesa-orbital.local/eveauth/login`, which calls the `SsoController`'s `login()`
 method to redirect the user to `https://login.eveonline.com/v2/oauth/authorize` with required url-encoded parameters:

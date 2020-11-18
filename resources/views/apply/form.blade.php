@@ -31,7 +31,7 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label class="col-md-4 control-label" for="reason_joining">Why do you want to join Mesa Orbital?</label>
+                                        <label class="col-md-4 control-label" for="reason_joining">Why do you want to join Allsides?</label>
                                         <div class="col-md-8">
                                             <textarea class="form-control" id="reason_joining" name="reason_joining"></textarea>
                                         </div>

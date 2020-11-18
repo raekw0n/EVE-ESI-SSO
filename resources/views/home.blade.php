@@ -10,10 +10,10 @@
                 <div class="col-md-12">
                     <div class="jumbotron bg-none">
                         <h1>
-                            Welcome to Mesa Orbital
+                            Welcome to Allsides Neutral Logistics
                         </h1>
                         <p class="font-big">
-                            We're a high-security industry & logistics corporation operating in New Eden.
+                            We're a logistics corporation operating throughout New Eden.
                         </p>
                         <p>
                             <a class="btn btn-outline-light btn-large" href="{{ route('apply') }}">Apply to Join<i class="ml-1 fas fa-arrow-right"></i></a>
@@ -27,7 +27,7 @@
         <div class="row text-center mt-2">
             <div class="col-md-4">
                 <h2>
-                    Haulage
+                    Get a haulage quote
                 </h2>
                 <p>
                     We'll safely haul your stuff all the way across empire space for a fraction of the price offered by
@@ -40,7 +40,7 @@
             </div>
             <div class="col-md-4">
                 <h2>
-                    Reprocessing
+                    View our testimonials
                 </h2>
                 <p>
                     Feel free to use our freeport reprocessing facility - Mesa Orbital Logistics Facility - located in the
@@ -53,7 +53,7 @@
             </div>
             <div class="col-md-4">
                 <h2>
-                    Manufacturing
+                    Come fly with us
                 </h2>
                 <p>
                     Feel free to also use our facility for your manufacturing needs, there is 0% tax on all

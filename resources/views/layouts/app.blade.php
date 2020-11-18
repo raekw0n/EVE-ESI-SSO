@@ -19,7 +19,7 @@
     </main>
     <footer class="footer">
         <div class="container">
-            <span class="text-muted">Copyright © {{ date('Y') }} Mesa Orbital. All Rights Reserved</span>
+            <span class="text-muted">Copyright © {{ date('Y') }} Allsides Neutral Logistics. All Rights Reserved</span>
         </div>
     </footer>
 </div>

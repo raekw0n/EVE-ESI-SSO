@@ -16,7 +16,7 @@
                             <p class="font-big">
                                 We're a logistics corporation operating throughout New Eden.
                             </p>
-                            <div class="row py-4">
+                            <div class="row py-4 d-none d-md-flex">
                                 <div class="col-4">
                                     <div class="card bg-dark">
                                         <div class="card-body">

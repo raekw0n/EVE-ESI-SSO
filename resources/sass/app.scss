@@ -7,14 +7,6 @@
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
-@include media-breakpoint-up(xs) {}
-
-@include media-breakpoint-up(md) {
-    .eve-bg {
-        min-height: 830px;
-    }
-}
-
 html {
     position: relative;
     min-height: 100%;
@@ -34,9 +26,8 @@ body {
     .jumbotron {
         h1 {
             font-family: Orbitron, sans-serif;
-            font-size: 4.5rem;
         }
-    } 
+    }
 }
 
 #application {
@@ -89,4 +80,18 @@ input.form-control, .form-control:disabled, .form-control[readonly] {
     line-height: 60px;
     background-color: #f5f5f5;
 }
+
+@include media-breakpoint-up(xs) {}
+
+@include media-breakpoint-up(md) {
+    .eve-bg {
+        min-height: 830px;
+    }
+    .jumbotron {
+        h1 {
+            font-size: 4.5rem;
+        }
+    }
+}
+
 

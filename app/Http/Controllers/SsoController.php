@@ -65,6 +65,8 @@ class SsoController extends Controller
         $character = $this->esi->verify();
         session()->put('character.id', $character->CharacterID);
         session()->put('character.name', $character->CharacterName);
+        session()->put('character.portrait', 'https://images.evetech.net/characters/'.
+            $character->CharacterID.'/portrait?tenant=tranquility&size=128');
 
 
         return redirect(route('home'))->with('logged_in', true);

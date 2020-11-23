@@ -18,13 +18,20 @@
             </li>
         </ul>
         <ul class="navbar-nav ml-auto">
-{{--            @esiguest--}}
+            @if(!session()->get('character'))
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('esi.sso.login') }}">
                         <img class="img-fluid" src="{{ asset('images/eve-sso-login.png') }}" alt="">
                     </a>
                 </li>
-{{--            @endesiguest--}}
+            @else
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        {{ session()->get('character')['name'] }}
+                        <img alt="portrait" class="ml-2" src="{{ session()->get('character')['portrait'] }}" width="36">
+                    </a>
+                </li>
+            @endif
         </ul>
     </div>
 </nav>

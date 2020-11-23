@@ -10,19 +10,8 @@
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('home') }}"> <i class="fas fa-home"></i> Home</a>
             </li>
-            <!-- <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                   aria-haspopup="true" aria-expanded="false">
-                    <i class="fas fa-wrench"></i> Services
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="{{ route('haulage') }}">Haulage</a>
-                    <a class="dropdown-item" href="{{ route('manufacturing') }}">Manufacturing</a>
-                    <a class="dropdown-item" href="{{ route('reprocessing') }}">Reprocessing</a>
-                </div>
-            </li> -->
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('haulage') }}"><i class="fas fa-truck"></i> Haulage Quote</a>
+                <a class="nav-link" href="{{ route('haulage') }}"><i class="fas fa-rocket"></i> Haulage Quote</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('apply') }}"><i class="fas fa-plus"></i> Apply to Join</a>

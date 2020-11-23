@@ -10,19 +10,17 @@
     @yield('additional_styles')
 </head>
 <body>
-<div id="app">
-    @include('partials.navigation.navbar')
-    <main>
-        @auth
-        @endauth
-        @yield('content')
-    </main>
-    <footer class="footer">
-        <div class="container">
-            <span class="text-muted">Copyright © {{ date('Y') }} Allsides Neutral Logistics. All Rights Reserved</span>
-        </div>
-    </footer>
-</div>
+@include('partials.navigation.navbar')
+<main>
+    @auth
+    @endauth
+    @yield('content')
+</main>
+<footer class="footer">
+    <div class="container">
+        <span class="text-muted">Copyright © {{ date('Y') }} Allsides Neutral Logistics. All Rights Reserved</span>
+    </div>
+</footer>
 <script src="{{ asset('js/app.js') }}"></script>
 @yield('additional_scripts')
 </body>

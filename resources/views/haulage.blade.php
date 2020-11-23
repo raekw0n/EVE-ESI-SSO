@@ -4,40 +4,34 @@
 @endsection
 
 @section('content')
-    <div id="application">
+    <div id="haulage" class="eve-bg">
         <div class="container py-4 text-light">
             <div class="row mt-3">
                 <div class="col-md-12">
-                    <h1>We'll haul your stuff across the galaxy...</h1>
+                    <h1>We'll haul your stuff across the galaxy!</h1>
                 </div>
             </div>
         </div>
-        <div class="container py-4 text-light">
-            <div class="card filter">
+        <div class="container text-light">
+            <div class="card bg-dark">
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-6">
                             <h2>FAQs</h2>
-                            <hr>
                             <strong class="font-big">Do you ship to/from nullsec?</strong>
                             <p>
-                                Not yet, however we are currently negotiating with alliances to gain access and will be
-                                able to offer this service shortly.
+                                We currently only ship to nullsec NPC systems, however we are currently working to secure
+                                agreements with alliances to allow us to operate services in more sov space. 
                             </p>
-                            <strong class="font-big">Why should I use you instead of PushX of Red Frog?</strong>
+                            <strong class="font-big">Why should I use Allsides?</strong>
                             <p>
-                                We're cheaper and more efficient than current leading freight service providers, plus
-                                it's always nice to help a new corporation grow!
+                                We're cheaper and more efficient than current leading freight service providers due to having no backlog. We do this mainly because
+                                we enjoy space trucking, it's our passion and profit comes second.
                             </p>
-                            <strong class="font-big">Lorem ipsum dolor sit amet?</strong>
-                            <p>Tema tis rolod muspi merol.</p>
-                            <strong class="font-big">Lorem ipsum dolor sit amet?</strong>
-                            <p>Tema tis rolod muspi merol.</p>
-                            <strong class="font-big">Lorem ipsum dolor sit amet?</strong>
-                            <p>Tema tis rolod muspi merol.</p>
                         </div>
                         <div class="col-md-6">
                             <h2>Quote</h2>
+                            @include('partials.calculators.haulage')
                         </div>
                     </div>
                 </div>

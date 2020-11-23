@@ -4,14 +4,18 @@
 @endsection
 
 @section('content')
-    <div id="application">
-        <div class="container py-4">
+    <div id="application" class="eve-bg h-100">
+        <div class="container py-4 text-light">
+            <div class="row mt-3">
+                <div class="col-md-12">
+                    <h1>Come fly with us!</h1>
+                </div>
+            </div>
+        </div>
+        <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <div class="card filter">
-                        <div class="card-header font-bigger">
-                          Apply to Join Mesa Orbital
-                        </div>
+                    <div class="card bg-dark">
                         <div class="card-body">
                             <form class="form-horizontal" method="post" action="{{ route('apply.submit') }}">
                                 @csrf

@@ -15,10 +15,11 @@ import {
     faHome,
     faPlus,
     faTruck,
+    faRocket,
     faWrench
 } from '@fortawesome/free-solid-svg-icons';
 
-library.add(faArrowLeft, faArrowRight, faCompass, faHome, faPlus, faTruck, faWrench);
+library.add(faArrowLeft, faArrowRight, faCompass, faHome, faPlus, faTruck, faRocket, faWrench);
 dom.watch();
 
 window.Toast = Swal.mixin({

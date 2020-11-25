@@ -4,9 +4,6 @@ namespace Mesa\Http\Controllers\CorporateManagement;
 
 use Mesa\Http\Controllers\Controller;
 
-/**
- * Import Controller.
- */
 class ImportController extends Controller
 {
     /** @var string */

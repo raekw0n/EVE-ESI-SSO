@@ -2,10 +2,12 @@
 
 namespace Mesa\Http\Controllers\CorporateManagement;
 
+use Illuminate\Http\JsonResponse;
 use Mesa\{Http\Controllers\Controller, Region, Constellation, System, Stargate, Station};
 
 class LocationsController extends Controller
 {
+    /** @var array|string[] $mappings */
     protected static array $mappings = [
         'regions' => Region::class,
         'constellations' => Constellation::class,
@@ -13,10 +15,19 @@ class LocationsController extends Controller
         'stations' => Station::class,
     ];
 
-    public function get($type, $id = null)
+    /**
+     * Fetch locations from data access.
+     *
+     * @param $type
+     * @param null $id
+     * @return JsonResponse
+     */
+    public function fetchLocationsFromDataAccess($type, $id = null)
     {
-        if (isset(static::$mappings[$type])) {
-            if ($id) {
+        if (isset(static::$mappings[$type]))
+        {
+            if ($id)
+            {
                 return response()->json(static::$mappings[$type]::where($type.'_id', $id));
             }
 

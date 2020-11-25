@@ -7,7 +7,8 @@ use Mesa\Http\Controllers\Controller;
 
 class BaseController extends Controller
 {
-    protected EsiCorporateApplicant $applicant;
+    /** @var EsiCorporateApplicant $aplicant */
+    protected EsiCorporateApplicant $esi;
 
     /**
      * BaseController constructor.
@@ -15,8 +16,9 @@ class BaseController extends Controller
     public function __construct()
     {
         $this->middleware(function($request, $next) {
-            if (session()->exists('character')) {
-                $this->applicant = new EsiCorporateApplicant(session('character'));
+            if (session()->exists('character'))
+            {
+                $this->esi = new EsiCorporateApplicant(session('character'));
 
                 return $next($request);
             }

@@ -6,12 +6,9 @@ use Illuminate\Http\Request;
 use Mesa\Http\Api\Clients\EsiAuthClient;
 use GuzzleHttp\Exception\GuzzleException;
 
-/**
- * ESI SSO Controller
- */
 class SsoController extends Controller
 {
-    /** @var EsiAuthClient  */
+    /** @var EsiAuthClient $esi */
     protected EsiAuthClient $esi;
 
     /**
@@ -38,6 +35,11 @@ class SsoController extends Controller
         return $this->esi->authorize($scopes);
     }
 
+    /**
+     * perform corporate SSO login.
+     *
+     * @return mixed
+     */
     public function corporateLogin()
     {
         $scopes = [

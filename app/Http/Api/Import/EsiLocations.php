@@ -6,12 +6,20 @@ use Mesa\Http\Api\Clients\EsiClient;
 
 class EsiLocations extends EsiClient
 {
+    /** @var string $type */
     protected string $type;
 
+    /**
+     * Fetch data from the ESI.
+     *
+     * @param int|null $id
+     * @return bool|mixed
+     */
     public function getData(int $id = null)
     {
         $endpoint = '/latest/universe/' . $this->type;
-        if (!is_null($id)) {
+        if (!is_null($id))
+        {
             $endpoint .= '/' . $id;
         }
 
@@ -19,6 +27,8 @@ class EsiLocations extends EsiClient
     }
 
     /**
+     * Set location type for the ESI.
+     *
      * @param mixed $type
      * @return EsiLocations
      */

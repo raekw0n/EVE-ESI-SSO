@@ -2,14 +2,9 @@
 
 namespace Mesa\Http\Controllers\CorporateApplicants;
 
-use Log;
 use Mesa\Application;
 use Illuminate\Http\Request;
-use GuzzleHttp\Exception\GuzzleException;
 
-/**
- * Application Constructor.
- */
 class ApplicationsController extends BaseController
 {
     /**
@@ -24,20 +19,20 @@ class ApplicationsController extends BaseController
 
     /**
      * Submit application.
+     *
      * @param Request $request
      * @return mixed
      */
     public function submit(Request $request)
     {
-        try {
-            $information = $this->applicant->getInfoRequiredForApplication();
-        } catch (GuzzleException $e) {
-            Log::error($e->getMessage());
-
-            return redirect()->back();
+        $information = $this->esi->getInfoRequiredForApplication();
+        if (!$information)
+        {
+            return response()->json(['error' => 'There was an error with your application, please try again.']);
         }
 
-        if(Application::where('character_name', $information['name'])->first()) {
+        if(Application::where('character_name', $information['name'])->first())
+        {
             return view('apply.confirmation', [
                 'character' => $information['name'],
                 'message' => 'We have already received an application for ' . $information['name'] . ', please contact Solomon Kaldari in-game for assistance.'
@@ -56,7 +51,8 @@ class ApplicationsController extends BaseController
 
         $application->character_raw_data = json_encode($information);
 
-        if (!$application->save()) {
+        if (!$application->save())
+        {
             return response()->json(['error' => 'There was an error with your application, please try again.']);
         }
 

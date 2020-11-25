@@ -71,7 +71,8 @@ class EsiAuthClient implements ClientInterface
             return false;
         }
 
-        if ($response && $response->getStatusCode() === 200) {
+        if ($response && $response->getStatusCode() === 200)
+        {
             return json_decode($response->getBody()->getContents());
         }
 
@@ -102,7 +103,7 @@ class EsiAuthClient implements ClientInterface
      * @param Request $request
      * @return mixed
      *
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws GuzzleException
      */
     public function callback(Request $request)
     {
@@ -113,7 +114,7 @@ class EsiAuthClient implements ClientInterface
     /**
      * Post login to receive access and refresh tokens.
      *
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws GuzzleException
      */
     public function login()
     {
@@ -135,11 +136,12 @@ class EsiAuthClient implements ClientInterface
      * Verify login and return character information.
      *
      * @return bool|mixed
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws GuzzleException
      */
     public function verify()
     {
-        if (!session()->exists('character.access_token')) {
+        if (!session()->exists('character.access_token'))
+        {
             return false;
         }
 
@@ -163,7 +165,8 @@ class EsiAuthClient implements ClientInterface
         $query = '&scope=';
         $count = count($scopes);
         $delim = '%20';
-        foreach ($scopes as $name => $key) {
+        foreach ($scopes as $name => $key)
+        {
             if (--$count <= 0) $delim = null;
             $query .= $key . $delim;
         }

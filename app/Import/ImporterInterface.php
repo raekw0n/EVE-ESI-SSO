@@ -2,9 +2,6 @@
 
 namespace Mesa\Import;
 
-/**
- * Importer Interface
- */
 interface ImporterInterface
 {
     /**

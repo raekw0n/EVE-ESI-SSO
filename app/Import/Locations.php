@@ -6,11 +6,9 @@ use Log;
 use Mesa\Http\Api\Import\EsiLocations;
 use Mesa\{Region, Constellation, System, Stargate, Station};
 
-/**
- * Locations Importer
- */
 class Locations extends AbstractImporter
 {
+    /** @var EsiLocations $esi */
     private EsiLocations $esi;
 
     /**
@@ -36,9 +34,12 @@ class Locations extends AbstractImporter
         $total = count($regions);
         $count = 0;
         $errors = 0;
-        if ($total > 0) {
-            foreach ($regions as $id) {
-                if (Region::where('region_id', $id)->first() === null) {
+        if ($total > 0)
+        {
+            foreach ($regions as $id)
+            {
+                if (Region::where('region_id', $id)->first() === null)
+                {
                     $data = $this->esi->getData($id);
 
                     $region = new Region();
@@ -46,7 +47,8 @@ class Locations extends AbstractImporter
                     $region->name = $data->name;
                     $region->description = $data->description ?? '';
 
-                    if ($region->save()) {
+                    if ($region->save())
+                    {
                         ++$count;
                     } else {
                         Log::error('Failed to import region: ' . $id);
@@ -77,9 +79,12 @@ class Locations extends AbstractImporter
         $total = count($constellations);
         $count = 0;
         $errors = 0;
-        if ($total > 0) {
-            foreach ($constellations as $id) {
-                if (Constellation::where('constellation_id', $id)->first() === null) {
+        if ($total > 0)
+        {
+            foreach ($constellations as $id)
+            {
+                if (Constellation::where('constellation_id', $id)->first() === null)
+                {
                     $data = $this->esi->getData($id);
 
                     $constellation = new Constellation();
@@ -87,7 +92,8 @@ class Locations extends AbstractImporter
                     $constellation->constellation_id = $data->constellation_id;
                     $constellation->name = $data->name;
 
-                    if ($constellation->save()) {
+                    if ($constellation->save())
+                    {
                         ++$count;
                     } else {
                         Log::error('Failed to import contellation: ' . $id);
@@ -118,9 +124,12 @@ class Locations extends AbstractImporter
         $total = count($systems);
         $count = 0;
         $errors = 0;
-        if ($total > 0) {
-            foreach ($systems as $id) {
-                if (System::where('system_id', $id)->first() === null) {
+        if ($total > 0)
+        {
+            foreach ($systems as $id)
+            {
+                if (System::where('system_id', $id)->first() === null)
+                {
                     $data = $this->esi->getData($id);
 
                     $system = new System();
@@ -130,7 +139,8 @@ class Locations extends AbstractImporter
                     $system->security_class = $data->security_class ?? '';
                     $system->security_status = $data->security_status ?? '';
 
-                    if ($system->save()) {
+                    if ($system->save())
+                    {
                         ++$count;
                     } else {
                         Log::error('Failed to import system: ' . $id);

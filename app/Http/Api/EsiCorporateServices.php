@@ -2,10 +2,6 @@
 
 namespace Mesa\Http\Api;
 
-use Log;
-use Cache;
-use Mesa\Station;
-use Mesa\Contract;
 use Mesa\Http\Api\Clients\EsiAuthClient;
 
 /**
@@ -13,16 +9,26 @@ use Mesa\Http\Api\Clients\EsiAuthClient;
  */
 class EsiCorporateServices extends EsiAuthClient
 {
+    /** @var mixed $token */
     private $token;
 
+    /** @var mixed $id */
     public $id;
 
+    /** @var mixed $name */
     private $name;
 
+    /** @var string $base */
     protected string $base = 'https://esi.evetech.net';
 
+    /** @var array $data */
     protected array $data = [];
 
+    /**
+     * EsiCorporateServices constructor.
+     *
+     * @param array $character
+     */
     public function __construct(array $character)
     {
         $this->token = $character['access_token'];
@@ -33,6 +39,13 @@ class EsiCorporateServices extends EsiAuthClient
         parent::__construct();
     }
 
+    /**
+     * Plan a journey route.
+     *
+     * @param $origin
+     * @param $destination
+     * @return bool|mixed
+     */
     public function planJourneyRoute($origin, $destination)
     {
         return $this->fetch('/latest/route' . $origin, $destination);

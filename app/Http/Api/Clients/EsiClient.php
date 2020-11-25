@@ -3,6 +3,7 @@
 namespace Mesa\Http\Api\Clients;
 
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\GuzzleException;
 
 /**
  * ESI client.
@@ -45,16 +46,23 @@ class EsiClient implements ClientInterface
      * @param string $endpoint
      * @param string $method
      * @return bool|mixed
-     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function fetch(string $endpoint = '', string $method = 'GET')
     {
         $endpoint .= $this->server;
-        $response = $this->client->request($method, $endpoint);
-        if ($response && $response->getStatusCode() === 200) {
-            return json_decode($response->getBody()->getContents());
-        } else {
+        try {
+            $response = $this->client->request($method, $endpoint);
+        } catch (GuzzleException $e) {
+            Log::error($e->getMessage());
+
             return false;
         }
+
+        if ($response && $response->getStatusCode() === 200)
+        {
+            return json_decode($response->getBody()->getContents());
+        }
+
+        return false;
     }
 }

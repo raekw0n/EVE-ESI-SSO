@@ -14,7 +14,8 @@ abstract class AbstractImporter implements ImporterInterface
     public function import(string $type)
     {
         $method = strtolower($type);
-        if (method_exists($this, $method)) {
+        if (method_exists($this, $method))
+        {
             return $this->{$method}();
         } else {
             throw new Exception($method . ' is not a valid import type.');

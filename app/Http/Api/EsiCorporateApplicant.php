@@ -2,12 +2,10 @@
 
 namespace Mesa\Http\Api;
 
-use Log;
-use Mesa\Contract;
 use Mesa\Http\Api\Clients\EsiAuthClient;
 
 /**
- * ESI Character Management.
+ * ESI Applicant Management.
  */
 class EsiCorporateApplicant extends EsiAuthClient
 {
@@ -27,7 +25,7 @@ class EsiCorporateApplicant extends EsiAuthClient
     protected array $data = [];
 
     /**
-     * EsiCorporateManagement constructor.
+     * EsiCorporateApplicant constructor.
      *
      * @param $character
      */
@@ -51,11 +49,14 @@ class EsiCorporateApplicant extends EsiAuthClient
         $this->data[$this->id] = ['name' => $this->name];
 
         $corpHistory = $this->getCorporationHistory();
-        if ($corpHistory){
-            foreach ($corpHistory as $corp) {
+        if ($corpHistory)
+        {
+            foreach ($corpHistory as $corp)
+            {
                 $information = $this->fetch('/latest/corporations/' . $corp->corporation_id);
 
-                if ($information) {
+                if ($information)
+                {
                     $this->data[$this->id]['corporation_history'][$information->name] = ['since' => $corp->start_date];
                     $this->data[$this->id]['current_corporation'] = key($this->data[$this->id]['corporation_history']);
                 }
@@ -67,9 +68,8 @@ class EsiCorporateApplicant extends EsiAuthClient
     }
 
     /**
-     * Get character corporation history.
+     * Get applicant corporation history.
      *
-     * @scope none
      * @return bool|mixed
      */
     private function getCorporationHistory()
@@ -79,9 +79,8 @@ class EsiCorporateApplicant extends EsiAuthClient
 
 
     /**
-     * Get character contacts.
+     * Get applicant contacts.
      *
-     * @scope esi-characters.read_contacts.v1
      * @return bool|mixed
      */
     private function getContacts()

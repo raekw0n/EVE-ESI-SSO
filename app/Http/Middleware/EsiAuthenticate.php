@@ -9,7 +9,8 @@ class EsiAuthenticate
 {
     public function handle($request, Closure $next)
     {
-        if (!session()->exists('character')) {
+        if (!session()->exists('character'))
+        {
             return redirect(route('esi.sso.login'));
         }
 

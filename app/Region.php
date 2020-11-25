@@ -7,8 +7,14 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Region extends Model
 {
+    /** @var string $table */
     protected $table = "regions";
 
+    /**
+     * Bootstrap the model.
+     *
+     * @return void;
+     */
     public static function boot()
     {
         parent::boot();
@@ -18,6 +24,11 @@ class Region extends Model
         });
     }
 
+    /**
+     * Constellations relation.
+     *
+     * @return HasMany
+     */
     public function constellations(): HasMany
     {
         return $this->hasMany(Constellation::class);

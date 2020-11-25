@@ -38,8 +38,4 @@ Route::group(['prefix' => 'services'], function() {
     Route::get('route-planner', 'CorporateServices\RoutePlanningController@index');
 });
 
-Route::group(['prefix' => 'locations'], function() {
-    Route::get('/{type}/{id?}', 'CorporateManagement\LocationsController@get')->name('locations.get');
-});
-
 Route::post('/import/{type}/{subtype}', 'CorporateManagement\ImportController@import')->name('import');

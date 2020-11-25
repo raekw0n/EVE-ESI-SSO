@@ -2,6 +2,7 @@
 
 namespace Mesa\Http\Api\Clients;
 
+use Log;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 

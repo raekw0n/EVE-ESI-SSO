@@ -22,7 +22,7 @@ class BaseController extends Controller
                 return $next($request);
             }
 
-            return redirect(route('esi.sso.login'));
+            return redirect(route('corporate.login'));
         });
     }
 }

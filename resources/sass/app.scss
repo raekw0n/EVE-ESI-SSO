@@ -79,8 +79,6 @@ body {
     bottom: 0;
     width: 100%;
     height: 60px;
-    line-height: 60px;
-    border-top: 1px solid #cccccc;
 }
 
 @include media-breakpoint-up(xs) {}
@@ -93,6 +91,9 @@ body {
         h1 {
             font-size: 4.5rem;
         }
+    }
+    .footer {
+        line-height: 60px;
     }
 }
 

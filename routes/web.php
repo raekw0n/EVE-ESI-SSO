@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'StaticPageController@index')->name('home');
+Route::get('/', 'StaticPageController@home')->name('home');
 Route::get('/services/haulage', 'StaticPageController@haulage')->name('haulage');
 
 Route::group(['prefix' => 'eveauth'], function() {
@@ -22,13 +22,9 @@ Route::group(['prefix' => 'eveauth'], function() {
 });
 
 Route::group(['prefix' => 'apply'], function() {
-    Route::get('', 'CorporateManagement\ApplicationsController@index')->name('apply');
-    Route::post('submit', 'CorporateManagement\ApplicationsController@submit')->name('apply.submit');
-    Route::get('info', 'CorporateManagement\CharacterController@getInforequiredForApplication')->name('apply.info');
-});
-
-Route::group(['prefix' => 'locations'], function() {
-    Route::get('/{type}/{id?}', 'CorporateManagement\LocationsController@get')->name('locations.get');
+    Route::get('', 'CorporateApplications\ApplicationsController@index')->name('apply');
+    Route::post('submit', 'CorporateApplications\ApplicationsController@submit')->name('apply.submit');
+    Route::get('info', 'CorporateApplications\CharacterController@getInforequiredForApplication')->name('apply.info');
 });
 
 Route::group(['prefix' => 'corporate', 'middleware' => ['esi.authenticated']], function() {
@@ -36,4 +32,7 @@ Route::group(['prefix' => 'corporate', 'middleware' => ['esi.authenticated']], f
     Route::post('contracts', 'CorporateManagement\ContractsController@updateContractsFromEsi')->name('corporate.contracts.update');
 });
 
+Route::group(['prefix' => 'locations'], function() {
+    Route::get('/{type}/{id?}', 'CorporateManagement\LocationsController@get')->name('locations.get');
+});
 Route::post('/import/{type}/{subtype}', 'CorporateManagement\ImportController@import')->name('import');

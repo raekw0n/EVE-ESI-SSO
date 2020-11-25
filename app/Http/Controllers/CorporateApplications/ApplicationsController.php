@@ -1,11 +1,11 @@
 <?php
 
-namespace Mesa\Http\Controllers\CorporateManagement;
+namespace Mesa\Http\Controllers\CorporateApplications;
 
-use GuzzleHttp\Exception\GuzzleException;
-use Illuminate\Http\Request;
+use Log;
 use Mesa\Application;
-use Mesa\Http\Api\EsiCharacter;
+use Illuminate\Http\Request;
+use GuzzleHttp\Exception\GuzzleException;
 
 /**
  * Application Constructor.
@@ -30,7 +30,7 @@ class ApplicationsController extends EsiController
     public function submit(Request $request)
     {
         try {
-            $information = $this->character->getInfoRequiredForApplication();
+            $information = $this->applicant->getInfoRequiredForApplication();
         } catch (GuzzleException $e) {
             Log::error($e->getMessage());
 
@@ -48,12 +48,13 @@ class ApplicationsController extends EsiController
 
         $application->character_name = $information['name'];
         $application->character_corporation = $information['current_corporation'];
-
         $application->length_playing = $request->get('length_playing');
         $application->favourite_activities = $request->get('favourite_activities');
         $application->reason_joining = $request->get('reason_joining');
         $application->real_life = $request->get('real_life');
         $application->haiku = $request->get('haiku');
+
+        $application->character_raw_data = json_encode($information);
 
         if (!$application->save()) {
             return response()->json(['error' => 'There was an error with your application, please try again.']);

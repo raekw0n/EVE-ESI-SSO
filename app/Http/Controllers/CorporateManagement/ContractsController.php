@@ -15,7 +15,7 @@ class ContractsController extends BaseController
 
     public function updateContractsFromEsi()
     {
-        $contracts = $this->esi->updateCourierContracts();
+        $contracts = $this->esi->updateContracts();
 
         return response()->json($contracts);
     }

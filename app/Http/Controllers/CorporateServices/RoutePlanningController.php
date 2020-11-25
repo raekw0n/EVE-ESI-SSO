@@ -2,7 +2,6 @@
 
 namespace Mesa\Http\Controllers\CorporateServices;
 
-use Mesa\Http\Controllers\CorporateManagement\BaseController;
 use Mesa\System;
 
 class RoutePlanningController extends BaseController
@@ -16,7 +15,7 @@ class RoutePlanningController extends BaseController
 
     public function planRoute($origin, $destination)
     {
-        $route = $this->esi->planCourierRoute($origin, $destination);
+        $route = $this->esi->planJourneyRoute($origin, $destination);
         if ($route)
         {
             dd($route);

@@ -10,10 +10,18 @@ class HomeController extends BaseController
     {
         $contracts = Contract::where('type', 'courier')->get();
 
-        $finances['divisions'] = $this->esi->mapFinanceDivisions(
-            $this->esi->fetchCorporateBalances(),
-            $this->esi->fetchCorporateDivisions('wallet')
-        );
+        $balances = $this->esi->fetchCorporateBalances();
+        $divisions = $this->esi->fetchCorporateDivisions('wallet');
+
+        unset($divisions[0], $balances[0]); // Unset unused Master division.
+        foreach ($balances as $balance) {
+            foreach ($divisions as $idx => $division) {
+                if ($balance->division === $division->division) {
+                    $divisions[$idx]->balance = $balance->balance;
+                }
+            }
+        }
+        $finances['divisions'] = $divisions;
 
         $finances['total'] = 0;
         foreach($finances['divisions'] as $idx => $finance)

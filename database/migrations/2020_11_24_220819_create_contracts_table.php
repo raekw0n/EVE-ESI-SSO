@@ -20,15 +20,17 @@ class CreateContractsTable extends Migration
             $table->string('type');
             $table->string('availability');
 
+            $table->integer('days_to_complete')->nullable();
+            $table->unsignedBigInteger('issuer_id');
             $table->unsignedBigInteger('reward')->default(0);
             $table->unsignedBigInteger('collateral')->default(0);
+            $table->unsignedBigInteger('start_location_id')->default(0);
+            $table->unsignedBigInteger('end_location_id')->default(0);
 
+            $table->timestamp('date_expires')->nullable();
             $table->timestamp('date_issued')->nullable();
             $table->timestamp('date_accepted')->nullable();
             $table->timestamp('date_completed')->nullable();
-
-            $table->unsignedBigInteger('start_location_id')->default(0);
-            $table->unsignedBigInteger('end_location_id')->default(0);
 
             $table->string('status');
         });

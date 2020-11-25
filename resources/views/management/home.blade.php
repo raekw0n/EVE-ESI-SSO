@@ -37,7 +37,7 @@
                             <h2>Haulage Contracts</h2>
                         </div>
                         <div class="card-body">
-                            <table id="corporate_contracts" class="table table-sm table-borderless">
+                            <table id="corporate_contracts" class="table table-sm">
                                 <thead>
                                     <tr>
                                         <th scope="col">ESI ID</th>
@@ -52,15 +52,15 @@
                                 </thead>
                                 <tbody>
                                     @foreach($contracts as $contract)
-                                        <tr>
+                                        <tr class="{{ $contract->status === 'finished' ? 'alert-success' : 'alert-warning' }}">
                                             <td>{{ $contract->esi_contract_id }}</td>
                                             <td>{{ number_format($contract->volume, 2) }}<sub>m3</sub></td>
                                             <td>{{ number_format($contract->collateral, 2) }} ISK</td>
                                             <td>{{ number_format($contract->reward, 2) }} ISK</td>
                                             <td>{{ date('jS M H:i:s', strtotime($contract->date_issued)) }}</td>
-                                            <td>{{ date('jS M H:i:s', strtotime($contract->date_accepted)) }}</td>
-                                            <td>{{ date('jS M H:i:s', strtotime($contract->date_completed)) }}</td>
-                                            <td>{{ $contract->status }}</td>
+                                            <td>{{ $contract->date_accepted ? date('jS M H:i:s', strtotime($contract->date_accepted)) : 'TBC' }}</td>
+                                            <td>{{ $contract->date_completed ? date('jS M H:i:s', strtotime($contract->date_completed)) : 'TBC' }}</td>
+                                            <td>{{ ucwords(str_replace("_", " ", $contract->status)) }}</td>
                                         </tr>
                                     @endforeach
                                 </tbody>
@@ -77,7 +77,9 @@
 @section('additional_scripts')
     <script>
         $(document).ready(function() {
-            $('#corporate_contracts').DataTable();
+            $('#corporate_contracts').DataTable({
+                "order": [[ 6, "desc" ]]
+            });
         })
     </script>
 @endsection

@@ -19,11 +19,11 @@
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('apply') }}"><i class="fas fa-plus"></i> Apply to Join</a>
             </li>
-        </ul>
-        <ul class="navbar-nav ml-auto">
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('corporate.management') }}"><i class="fas fa-star"></i> Corporate Management</a>
             </li>
+        </ul>
+        <ul class="navbar-nav ml-auto">
             @esiauth
                 <li class="nav-item">
                     <a href="#" class="nav-link">

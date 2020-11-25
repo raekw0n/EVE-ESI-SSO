@@ -47,9 +47,11 @@ body {
     }
 }
 
-input.form-control, .form-control:disabled, .form-control[readonly] {
-    background: rgba(100, 100, 100, 0.2);
-    color: white;
+#haulage-calculator {
+    input.form-control, .form-control:disabled, .form-control[readonly] {
+        background: rgba(100, 100, 100, 0.2);
+        color: white;
+    }
 }
 
 .filter {

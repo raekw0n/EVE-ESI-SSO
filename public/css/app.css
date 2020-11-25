@@ -10962,9 +10962,9 @@ body {
   color: white;
 }
 
-input.form-control,
-.form-control:disabled,
-.form-control[readonly] {
+#haulage-calculator input.form-control,
+#haulage-calculator .form-control:disabled,
+#haulage-calculator .form-control[readonly] {
   background: rgba(100, 100, 100, 0.2);
   color: white;
 }

@@ -2,7 +2,9 @@
 
 namespace Mesa\Http\Api\Clients;
 
+use Log;
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
@@ -53,21 +55,27 @@ class EsiAuthClient implements ClientInterface
      * @param string $endpoint
      * @param string $method
      * @return bool|mixed
-     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function fetch(string $endpoint = '', string $method = 'GET')
     {
         $endpoint .= $this->server;
-        $response = $this->client->request($method, $endpoint, [
-            'headers' => [
-                'Authorization' => 'Bearer ' . session()->get('character.access_token')
-            ]
-        ]);
-        if ($response && $response->getStatusCode() === 200) {
-            return json_decode($response->getBody()->getContents());
-        } else {
+        try {
+            $response = $this->client->request($method, $endpoint, [
+                'headers' => [
+                    'Authorization' => 'Bearer ' . session()->get('character.access_token')
+                ]
+            ]);
+        } catch (GuzzleException $e) {
+            Log::error($e->getMessage());
+
             return false;
         }
+
+        if ($response && $response->getStatusCode() === 200) {
+            return json_decode($response->getBody()->getContents());
+        }
+
+        return false;
     }
 
     /**

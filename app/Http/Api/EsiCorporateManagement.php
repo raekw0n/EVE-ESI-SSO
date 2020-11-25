@@ -85,41 +85,49 @@ class EsiCorporateManagement extends EsiAuthClient
     {
         $contracts = $this->fetch('/latest/corporations/' . config('eve.esi.corporation') . '/contracts');
         $count = 0;
-        $total = count($contracts);
+        $total = 0;
         $errors = 0;
-        foreach ($contracts as $contract)
-        {
-            if (Contract::where('esi_contract_id', $contract->contract_id)->first() === null) {
-                $model = new Contract;
-                $model->esi_contract_id = $contract->contract_id;
-                $model->volume = $contract->volume;
-                $model->type = $contract->type;
-                $model->availability = $contract->availability;
 
-                if ($contract->type === "courier") {
-                    $model->reward = $contract->reward;
-                    $model->collateral = $contract->collateral;
-                    $model->start_location_id = $contract->start_location_id;
-                    $model->end_location_id = $contract->end_location_id;
-                }
+        if ($contracts) {
+            $total = count($contracts);
+            foreach ($contracts as $contract)
+            {
+                if (Contract::where('esi_contract_id', $contract->contract_id)->first() === null) {
+                    $model = new Contract;
+                    $model->esi_contract_id = $contract->contract_id;
+                    $model->volume = $contract->volume;
+                    $model->type = $contract->type;
+                    $model->availability = $contract->availability;
 
-                $model->date_issued = date('Y-m-d H:i:s', strtotime($contract->date_issued));
-                $model->date_accepted = date('Y-m-d H:i:s', strtotime($contract->date_accepted));
-                $model->date_completed = date('Y-m-d H:i:s', strtotime($contract->date_completed));
+                    if ($contract->type === "courier") {
+                        $model->reward = $contract->reward;
+                        $model->collateral = $contract->collateral;
+                        $model->start_location_id = $contract->start_location_id;
+                        $model->end_location_id = $contract->end_location_id;
+                    }
 
-                $model->status = $contract->status;
+                    $model->date_issued = date('Y-m-d H:i:s', strtotime($contract->date_issued));
+                    $model->date_accepted = isset($contract->date_accepted)
+                        ? date('Y-m-d H:i:s', strtotime($contract->date_accepted)) : null;
+                    $model->date_completed = isset($contract->date_completed)
+                        ? date('Y-m-d H:i:s', strtotime($contract->date_completed)) : null;
 
-                if ($model->save()) {
-                    $this->updateStationsFromContract($model);
-                    ++$count;
+                    $model->status = $contract->status;
+
+                    if ($model->save()) {
+                        $this->updateStationsFromContract($model);
+                        ++$count;
+                    } else {
+                        ++$errors;
+                        Log::error('Failed to import contract: ' . $contract->contract_id);
+                    }
+
                 } else {
-                    ++$errors;
-                    Log::error('Failed to import contract: ' . $contract->contract_id);
+                    --$total;
                 }
-
-            } else {
-                --$total;
             }
+        } else {
+            ++$errors;
         }
 
         return [
@@ -148,15 +156,17 @@ class EsiCorporateManagement extends EsiAuthClient
 
             foreach ($stations as $station)
             {
-                if (Station::where('station_id', $station->station_id)->first() === null) {
-                    $model = new Station();
-                    $model->system_id = $station->system_id;
-                    $model->station_id = $station->station_id;
-                    $model->name = $station->name;
-                    $model->max_dock_ship_volume = $station->max_dockable_ship_volume;
+                if ($station) {
+                    if (Station::where('station_id', $station->station_id)->first() === null) {
+                        $model = new Station();
+                        $model->system_id = $station->system_id;
+                        $model->station_id = $station->station_id;
+                        $model->name = $station->name;
+                        $model->max_dock_ship_volume = $station->max_dockable_ship_volume;
 
-                    if (!$model->save()) {
-                        Log::error('Failed to import station ' . $station->station_id);
+                        if (!$model->save()) {
+                            Log::error('Failed to import station ' . $station->station_id);
+                        }
                     }
                 }
             }
@@ -165,13 +175,7 @@ class EsiCorporateManagement extends EsiAuthClient
 
     public function planCourierRoute($origin, $destination)
     {
-        try {
-            $route = $this->fetch('/latest/route/' . $origin . '/' . $destination);
-        } catch (GuzzleException $e) {
-            Log::error('Could not plan route between '. $origin . ' and ' . $destination);
-
-            return false;
-        }
+        $route = $this->fetch('/latest/route/' . $origin . '/' . $destination);
 
         return $route;
     }

@@ -45,20 +45,23 @@ class EsiCorporateApplicant extends EsiAuthClient
      * Obtain information required for character applications.
      *
      * @return mixed
-     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function getInfoRequiredForApplication()
     {
         $this->data[$this->id] = ['name' => $this->name];
 
         $corpHistory = $this->getCorporationHistory();
-        foreach ($corpHistory as $corp) {
-            $info = $this->fetch('/latest/corporations/' . $corp->corporation_id);
-            $this->data[$this->id]['corporation_history'][$info->name] = ['since' => $corp->start_date];
-        }
+        if ($corpHistory){
+            foreach ($corpHistory as $corp) {
+                $information = $this->fetch('/latest/corporations/' . $corp->corporation_id);
 
-        $this->data[$this->id]['current_corporation'] = key($this->data[$this->id]['corporation_history']);
-        $this->data[$this->id]['contacts'] = $this->getContacts();
+                if ($information) {
+                    $this->data[$this->id]['corporation_history'][$information->name] = ['since' => $corp->start_date];
+                    $this->data[$this->id]['current_corporation'] = key($this->data[$this->id]['corporation_history']);
+                }
+            }
+            $this->data[$this->id]['contacts'] = $this->getContacts();
+        }
 
         return $this->data[$this->id];
     }
@@ -68,7 +71,6 @@ class EsiCorporateApplicant extends EsiAuthClient
      *
      * @scope none
      * @return bool|mixed
-     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     private function getCorporationHistory()
     {
@@ -81,7 +83,6 @@ class EsiCorporateApplicant extends EsiAuthClient
      *
      * @scope esi-characters.read_contacts.v1
      * @return bool|mixed
-     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     private function getContacts()
     {

@@ -19,6 +19,7 @@ Route::get('/services/haulage', 'StaticPageController@haulage')->name('haulage')
 Route::group(['prefix' => 'eveauth'], function() {
     Route::get('login', 'SsoController@login')->name('esi.sso.login');
     Route::get('callback', 'SsoController@callback')->name('esi.sso.callback');
+    Route::get('refresh', 'SsoController@refresh')->name('esi.sso.refresh');
 });
 
 Route::group(['prefix' => 'apply'], function() {

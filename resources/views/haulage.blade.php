@@ -7,16 +7,16 @@
     <div id="haulage" class="eve-bg">
         <div class="container py-4 text-light">
             <div class="row mt-3">
-                <div class="col-md-12">
+                <div class="col-12">
                     <h1>We'll haul your stuff across the galaxy!</h1>
                 </div>
             </div>
         </div>
-        <div class="container text-light">
+        <div class="container pb-4 text-light">
             <div class="card bg-dark filter">
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-sm-12 col-md-6">
                             <h2>FAQs</h2>
                             <strong class="font-big">Do you ship to/from nullsec?</strong>
                             <p>
@@ -29,7 +29,7 @@
                                 we enjoy space trucking, it's our passion and profit comes second.
                             </p>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-sm-12 col-md-6">
                             <h2>Quote</h2>
                             @include('partials.calculators.haulage')
                         </div>

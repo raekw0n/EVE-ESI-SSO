@@ -133,6 +133,27 @@ class EsiAuthClient implements ClientInterface
     }
 
     /**
+     * Issue a refresh token.
+     *
+     * @throws GuzzleException
+     */
+    public function refresh()
+    {
+        $response = $this->client->request('POST', '/v2/oauth/token', [
+            'auth' => [
+                $this->clientId,
+                $this->secretKey
+            ],
+            'form_params' => [
+                'grant_type' => 'refresh_token',
+                'refresh_token' => session('character')['refresh_token']
+            ]
+        ]);
+
+        return json_decode($response->getBody()->getContents());
+    }
+
+    /**
      * Verify login and return character information.
      *
      * @return bool|mixed

@@ -14,27 +14,18 @@ class HomeController extends BaseController
     public function index()
     {
         $contracts = Contract::where('type', 'courier')->get();
-
         $balances = $this->esi->fetchCorporateBalances();
         $divisions = $this->esi->fetchCorporateDivisions('wallet');
 
-        unset($divisions[0], $balances[0]); // Unset unused Master division.
-        foreach ($balances as $balance)
-        {
-            foreach ($divisions as $idx => $division)
-            {
-                if ($balance->division === $division->division)
-                {
-                    $divisions[$idx]->balance = $balance->balance;
-                }
-            }
-        }
-        $finances['divisions'] = $divisions;
-
+        $finances['ledger'] = [];
         $finances['total'] = 0;
-        foreach ($finances['divisions'] as $idx => $finance)
+        if ($balances && $divisions)
         {
-            $finances['total'] += $finance->balance;
+            $finances['ledger'] = $this->esi->buildCorporateLedger($divisions, $balances);
+            foreach ($finances['ledger'] as $idx => $division)
+            {
+                $finances['total'] += $division->balance;
+            }
         }
 
         return view('management.home', compact('contracts', 'finances'));

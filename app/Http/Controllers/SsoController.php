@@ -52,6 +52,7 @@ class SsoController extends Controller
             'esi-corporations.read_corporation_membership.v1',
             'esi-corporations.track_members.v1',
             'esi-corporations.read_facilities.v1',
+            'esi-killmails.read_corporation_killmails.v1',
             'esi-contracts.read_corporation_contracts.v1',
             'esi-wallet.read_corporation_wallets.v1',
             'esi-planets.read_customs_offices.v1',

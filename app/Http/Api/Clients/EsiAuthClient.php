@@ -14,7 +14,7 @@ use Illuminate\Http\Request;
 class EsiAuthClient implements ClientInterface
 {
     /** @var string $server */
-    protected string $server = 'tranquility';
+    protected string $server;
 
     /** @var Client $client */
     protected Client $client;

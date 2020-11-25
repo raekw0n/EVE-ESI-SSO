@@ -19,8 +19,15 @@
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('apply') }}"><i class="fas fa-plus"></i> Apply to Join</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('corporate.management') }}"><i class="fas fa-star"></i> Corporate Management</a>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="corporate_management" role="button"
+                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Corporation Management
+                </a>
+                <div class="dropdown-menu" aria-labelledby="corporate_management">
+                    <a class="dropdown-item nav-item" href="{{ route('corporate.management') }}"><i class="fas fa-star"></i> Dashboard</a>
+                    <a class="dropdown-item nav0item" href="{{ route('corporate.contracts') }}"><i class="fas fa-compass"></i> Contracts</a>
+                </div>
             </li>
         </ul>
         <ul class="navbar-nav ml-auto">

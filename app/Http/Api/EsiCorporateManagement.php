@@ -37,10 +37,35 @@ class EsiCorporateManagement extends EsiAuthClient
     {
         $this->token = $character['access_token'];
         $this->id = $character['id'];
-
         $this->name = $character['name'];
 
         parent::__construct();
+    }
+
+    /**
+     * Build corporate ledger.
+     *
+     * @param $divisions
+     * @param $balances
+     * @return array
+     */
+    public function buildCorporateLedger($divisions, $balances)
+    {
+        unset($divisions[0], $balances[0]); // Unset unused Master division.
+        foreach ($balances as $balance)
+        {
+            foreach ($divisions as $idx => $division)
+            {
+                if ($balance->division === $division->division)
+                {
+                    $divisions[$idx]->balance = $balance->balance;
+                    $divisions[$idx]->transactions = $this->fetchCorporateTransactions($balance->division);
+                    $divisions[$idx]->journal = $this->fetchCorporateJournal($balance->division);
+                }
+            }
+        }
+
+        return $divisions;
     }
 
     /**
@@ -83,6 +108,48 @@ class EsiCorporateManagement extends EsiAuthClient
         }
 
         return $wallets;
+    }
+
+    /**
+     * Fetch corporate journal
+     *
+     * @param $division
+     * @return bool|mixed
+     */
+    public function fetchCorporateJournal($division)
+    {
+        if (Cache::has('corporate.journal'))
+        {
+            $journal = Cache::get('corporate.journal');
+        } else {
+            $journal = $this->fetch('/latest/corporations/'
+                . config('eve.esi.corporation')
+                . '/wallets/' . $division . '/journal');
+            Cache::put('corporate.journal', $journal);
+        }
+
+        return $journal;
+    }
+
+    /**
+     * Fetch corporate transactions
+     *
+     * @param $division
+     * @return bool|mixed
+     */
+    public function fetchCorporateTransactions($division)
+    {
+        if (Cache::has('corporate.transactions'))
+        {
+            $transactions = Cache::get('corporate.transactions');
+        } else {
+            $transactions = $this->fetch('/latest/corporations/'
+                . config('eve.esi.corporation')
+                . '/wallets/' . $division . '/transactions');
+            Cache::put('corporate.transactions', $transactions);
+        }
+
+        return $transactions;
     }
 
     /**

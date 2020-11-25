@@ -2,7 +2,9 @@
 
 return [
     'esi' => [
-        'base_uri' => env("EVE_ESI_URL"),
+        'base_uri' => env("EVE_ESI_BASE_URL"),
+        'login_uri' => env("EVE_ESI_LOGIN_URL"),
+
         'server' => env("EVE_ESI_SERVER", 'tranquility'),
 
         'client_id' => env("EVE_ESI_CLIENT_ID"),

@@ -33,7 +33,6 @@ class EsiCorporateApplicant extends EsiAuthClient
     {
         $this->token = $character['access_token'];
         $this->id = $character['id'];
-
         $this->name = $character['name'];
 
         parent::__construct();

@@ -18,9 +18,7 @@ class CreateStationsTable extends Migration
             $table->unsignedBigInteger('system_id');
             $table->unsignedBigInteger('station_id')->unique();
             $table->string('name');
-            $table->float('max_dock_ship_volume');
-            $table->float('reprocessing_station_efficiency')->nullable();
-            $table->float('reprocessing_station_tax')->nullable();
+            $table->unsignedBigInteger('max_dock_ship_volume');
             $table->timestamps();
             $table->foreign('system_id')->references('system_id')->on('systems');
         });

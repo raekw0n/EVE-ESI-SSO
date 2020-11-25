@@ -4,10 +4,9 @@ import _ from 'lodash';
 import axios from 'axios';
 import 'bootstrap';
 import Swal from 'sweetalert2';
-import {
-    library,
-    dom
-} from '@fortawesome/fontawesome-svg-core';
+import 'datatables.net';
+import 'datatables.net-bs4';
+import { library, dom } from '@fortawesome/fontawesome-svg-core';
 import {
     faArrowLeft,
     faArrowRight,
@@ -16,10 +15,12 @@ import {
     faPlus,
     faTruck,
     faRocket,
-    faWrench
+    faWrench,
+    faStar,
+    faUser,
 } from '@fortawesome/free-solid-svg-icons';
 
-library.add(faArrowLeft, faArrowRight, faCompass, faHome, faPlus, faTruck, faRocket, faWrench);
+library.add(faArrowLeft, faArrowRight, faCompass, faHome, faPlus, faTruck, faRocket, faWrench, faStar, faUser);
 dom.watch();
 
 window.Toast = Swal.mixin({

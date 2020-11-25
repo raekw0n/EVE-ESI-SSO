@@ -31,14 +31,5 @@ class AppServiceProvider extends ServiceProvider
 
             return false;
         });
-
-        // create a @verified() directive for verified users
-        Blade::if('esiguest', function () {
-            if(!session()->exists('character')) {
-                return true;
-            }
-
-            return false;
-        });
     }
 }

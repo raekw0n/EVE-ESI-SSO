@@ -17,11 +17,19 @@ class CreateContractsTable extends Migration
             $table->id();
             $table->string('esi_contract_id');
             $table->string('volume');
+            $table->string('type');
+            $table->string('availability');
+
+            $table->unsignedBigInteger('reward')->default(0);
+            $table->unsignedBigInteger('collateral')->default(0);
+
             $table->timestamp('date_issued')->nullable();
             $table->timestamp('date_accepted')->nullable();
             $table->timestamp('date_completed')->nullable();
-            $table->string('start_location_id');
-            $table->string('end_location_id');
+
+            $table->unsignedBigInteger('start_location_id')->default(0);
+            $table->unsignedBigInteger('end_location_id')->default(0);
+
             $table->string('status');
         });
     }

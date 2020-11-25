@@ -21,20 +21,23 @@
             </li>
         </ul>
         <ul class="navbar-nav ml-auto">
-{{--            @if(session()->get('character'))--}}
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('corporate.management') }}"><i class="fas fa-star"></i> Corporate Management</a>
+            </li>
+            @esiauth
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        {{ session('character')['name'] }}
+                        <img alt="portrait" class="ml-2" src="{{ session('character')['portrait'] }}" width="36">
+                    </a>
+                </li>
+            @else
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('esi.sso.login') }}">
                         <img class="img-fluid" src="{{ asset('images/eve-sso-login.png') }}" alt="">
                     </a>
                 </li>
-{{--            @else--}}
-{{--                <li class="nav-item">--}}
-{{--                    <a href="#" class="nav-link">--}}
-{{--                        {{ session()->get('character')['name'] }}--}}
-{{--                        <img alt="portrait" class="ml-2" src="{{ session()->get('character')['portrait'] }}" width="36">--}}
-{{--                    </a>--}}
-{{--                </li>--}}
-{{--            @endif--}}
+            @endesiauth
         </ul>
     </div>
 </nav>

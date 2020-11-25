@@ -10,7 +10,7 @@ use GuzzleHttp\Exception\GuzzleException;
 /**
  * Application Constructor.
  */
-class ApplicationsController extends EsiController
+class ApplicationsController extends BaseController
 {
     /**
      * Render application page.
@@ -25,7 +25,7 @@ class ApplicationsController extends EsiController
     /**
      * Submit application.
      * @param Request $request
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
+     * @return mixed
      */
     public function submit(Request $request)
     {

@@ -13,7 +13,7 @@
             </div>
         </div>
         <div class="container text-light">
-            <div class="card bg-dark">
+            <div class="card bg-dark filter">
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-6">
@@ -21,7 +21,7 @@
                             <strong class="font-big">Do you ship to/from nullsec?</strong>
                             <p>
                                 We currently only ship to nullsec NPC systems, however we are currently working to secure
-                                agreements with alliances to allow us to operate services in more sov space. 
+                                agreements with alliances to allow us to operate services in more sov space.
                             </p>
                             <strong class="font-big">Why should I use Allsides?</strong>
                             <p>

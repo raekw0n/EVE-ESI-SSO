@@ -15,7 +15,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <div class="card bg-dark">
+                    <div class="card bg-dark filter">
                         <div class="card-body">
                             <form class="form-horizontal" method="post" action="{{ route('apply.submit') }}">
                                 @csrf

@@ -36,7 +36,7 @@
         </div>
     </div>
     <div class="col align-self-center">
-        <button class="btn btn-outline-light" type="button">Calculate</button>
+        <button class="btn btn-outline-light" id="calculate" type="button">Calculate</button>
     </div>
 </div>
 
@@ -45,14 +45,14 @@
 <script>
 $(document).ready(function(){
     let clipboard_copy = "";
-    
+
     $('#collateral').keyup(function(event) {
         if(event.which >= 37 && event.which <= 40) return;
         $(this).val(function(index, value) {
             return value.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         });
     });
-    
+
 
     $('#jumps').keyup(function(event) {
         if(event.which >= 37 && event.which <= 40) return;
@@ -60,8 +60,8 @@ $(document).ready(function(){
             return value.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         });
     });
-    
-    $('html').click(function() {
+
+    $('#calculate').click(function() {
         calculate();
     });
 
@@ -76,7 +76,7 @@ $(document).ready(function(){
         let baseColPercentage = 0.005;
         let pickupFee = 0;
         let pricePerJump = 300000;
-        let incPerJump = 1.002; 
+        let incPerJump = 1.002;
         let pickupReward = 0;
         let reward = 0;
         let baseRate = 0;
@@ -84,32 +84,32 @@ $(document).ready(function(){
         function numberWithCommas(x) {
             return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         }
-        
+
         baseRate = pricePerJump * jumps;
-        
+
         for (i = 1; i < jumps; i++) {
             baseColPercentage += 0.001;
             if (baseColPercentage >= 0.01) { break; }
         }
-        
+
         pickupFee = collateral * baseColPercentage;
         pickupReward = pickupFee * incPerJump^jumps;
         reward = baseRate + pickupReward;
-        
+
         if ((collateral * 0.001 * jumps) > reward) {
             reward = collateral * 0.001 * jumps;
         }
-        
+
         if (reward >= (collateral * 0.5)) {
             reward = collateral * 0.3;
         }
-        
+
         reward = Math.round(reward / 1000) * 1000;
 
         if ($('#rush').prop('checked')) {
             reward = reward * 2;
         }
-        
+
         if ($('#lowsec').prop('checked')) {
             reward = reward * 2;
         }

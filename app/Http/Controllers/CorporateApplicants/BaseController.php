@@ -5,12 +5,12 @@ namespace Mesa\Http\Controllers\CorporateApplicants;
 use Mesa\Http\Api\EsiCorporateApplicant;
 use Mesa\Http\Controllers\Controller;
 
-class EsiController extends Controller
+class BaseController extends Controller
 {
     protected EsiCorporateApplicant $applicant;
 
     /**
-     * EsiController constructor.
+     * BaseController constructor.
      */
     public function __construct()
     {

@@ -91,7 +91,6 @@ class SsoController extends Controller
     public function refresh()
     {
         $auth = $this->esi->refresh();
-        dd($auth);
         session()->put('character.access_token', $auth->access_token);
         session()->put('character.expires_in', $auth->expires_in);
         session()->put('character.refresh_token', $auth->refresh_token);

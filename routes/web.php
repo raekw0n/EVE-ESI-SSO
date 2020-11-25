@@ -13,26 +13,27 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'HomeController@index')->name('home');
-
-Route::group(['prefix' => 'services'], function() {
-    Route::get('/haulage', 'PageController@haulage')->name('haulage');
-    Route::get('/reprocessing', 'PageController@reprocessing')->name('reprocessing');
-    Route::get('/manufacturing', 'PageController@manufacturing')->name('manufacturing');
-});
-
-Route::get('/apply', 'ApplicationController@index')->name('apply');
-Route::post('/apply/submit', 'ApplicationController@submit')->name('apply.submit');
-
-Route::get('/apply/info', 'CharacterController@getInforequiredForApplication')->name('apply.info');
-
-Route::group(['prefix' => 'locations'], function() {
-    Route::get('/{type}/{id?}', 'LocationsController@get')->name('locations.get');
-});
+Route::get('/', 'StaticPageController@index')->name('home');
+Route::get('/services/haulage', 'StaticPageController@haulage')->name('haulage');
 
 Route::group(['prefix' => 'eveauth'], function() {
     Route::get('login', 'SsoController@login')->name('esi.sso.login');
     Route::get('callback', 'SsoController@callback')->name('esi.sso.callback');
 });
 
-Route::post('/import/{type}/{subtype}', 'ImportController@import')->name('import');
+Route::group(['prefix' => 'apply'], function() {
+    Route::get('', 'CorporateManagement\ApplicationsController@index')->name('apply');
+    Route::post('submit', 'CorporateManagement\ApplicationsController@submit')->name('apply.submit');
+    Route::get('info', 'CorporateManagement\CharacterController@getInforequiredForApplication')->name('apply.info');
+});
+
+Route::group(['prefix' => 'locations'], function() {
+    Route::get('/{type}/{id?}', 'CorporateManagement\LocationsController@get')->name('locations.get');
+});
+
+Route::group(['prefix' => 'corporate', 'middleware' => ['esi.authenticated']], function() {
+    Route::get('contracts', 'CorporateManagement\ContractsController@fetchContractsFromDataAccess')->name('corporate.contracts');
+    Route::post('contracts', 'CorporateManagement\ContractsController@updateContractsFromEsi')->name('corporate.contracts.update');
+});
+
+Route::post('/import/{type}/{subtype}', 'CorporateManagement\ImportController@import')->name('import');

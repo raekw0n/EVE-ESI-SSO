@@ -39,7 +39,7 @@ return [
     |
     */
 
-    'debug' => (bool) env('APP_DEBUG', false),
+    'debug' => (bool)env('APP_DEBUG', false),
 
     /*
     |--------------------------------------------------------------------------
@@ -169,11 +169,12 @@ return [
         /*
          * Application Service Providers...
          */
-       Mesa\Providers\AppServiceProvider::class,
-       Mesa\Providers\AuthServiceProvider::class,
+        Mesa\Providers\AppServiceProvider::class,
+        Mesa\Providers\AuthServiceProvider::class,
         //Mesa\Providers\BroadcastServiceProvider::class,
-       Mesa\Providers\EventServiceProvider::class,
-       Mesa\Providers\RouteServiceProvider::class,
+        Mesa\Providers\EventServiceProvider::class,
+        Mesa\Providers\RouteServiceProvider::class,
+//        Mesa\Providers\EsiServiceProvider::class
 
     ],
 

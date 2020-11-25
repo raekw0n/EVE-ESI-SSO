@@ -1,7 +1,8 @@
 <?php
 
-namespace Mesa\Http\Controllers;
+namespace Mesa\Http\Controllers\CorporateManagement;
 
+use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Http\Request;
 use Mesa\Application;
 use Mesa\Http\Api\EsiCharacter;
@@ -9,26 +10,8 @@ use Mesa\Http\Api\EsiCharacter;
 /**
  * Application Constructor.
  */
-class ApplicationController extends Controller
+class ApplicationsController extends EsiController
 {
-    /** @var mixed $character */
-    private $character;
-
-    /**
-     * CharacterController constructor.
-     */
-    public function __construct()
-    {
-        $this->middleware(function($request, $next) {
-            if(session()->exists('character')) {
-                $this->character = new EsiCharacter(session()->get('character'));
-                return $next($request);
-            }
-
-            return redirect(route('esi.sso.login'));
-        });
-    }
-
     /**
      * Render application page.
      *
@@ -41,10 +24,18 @@ class ApplicationController extends Controller
 
     /**
      * Submit application.
+     * @param Request $request
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
      */
     public function submit(Request $request)
     {
-        $information = $this->character->getInfoRequiredForApplication();
+        try {
+            $information = $this->character->getInfoRequiredForApplication();
+        } catch (GuzzleException $e) {
+            Log::error($e->getMessage());
+
+            return redirect()->back();
+        }
 
         if(Application::where('character_name', $information['name'])->first()) {
             return view('apply.confirmation', [

@@ -6,8 +6,7 @@ use Mesa\Http\Api\Clients\EsiClient;
 
 class EsiLocations extends EsiClient
 {
-
-    protected $type;
+    protected string $type;
 
     public function getData(int $id = null)
     {

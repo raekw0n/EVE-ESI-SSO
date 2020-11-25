@@ -9,25 +9,25 @@ use GuzzleHttp\Client;
  */
 class EsiClient implements ClientInterface
 {
-    /** @var EsiClient $client */
-    protected $client;
+    /** @var Client $client */
+    protected Client $client;
 
     /** @var string $server */
-    protected $server;
+    protected string $server;
 
     /** @var string $query */
-    protected $query;
+    protected string $query;
 
     /** @var string $format */
-    protected $format;
+    protected string $format;
 
     /** @var array $mappings */
-    protected static $mappings = [];
+    protected static array $mappings = [];
 
     /**
      * EsiClient client constructor.
      *
-     * @param string $server
+     * @param string|null $server
      */
     public function __construct(string $server = null)
     {

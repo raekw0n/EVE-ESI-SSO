@@ -2,8 +2,13 @@
 
 namespace Mesa\Http\Controllers;
 
-class PageController extends Controller
+class StaticPageController extends Controller
 {
+    public function home()
+    {
+        return view('home');
+    }
+
     public function haulage()
     {
         return view('haulage');

@@ -10928,12 +10928,6 @@ a.text-dark:focus {
   }
 }
 
-@media (min-width: 768px) {
-  .eve-bg {
-    min-height: 830px;
-  }
-}
-
 html {
   position: relative;
   min-height: 100%;
@@ -10944,14 +10938,13 @@ body {
 }
 
 .eve-bg {
-  background-image: url(/images/eve.png?50326951ed88fe0d3c662902401eb34b);
+  background-image: url(/images/eve.png?c8f0b2a18510507c736ab731092d982a);
   background-repeat: no-repeat;
   background-size: cover;
 }
 
 #introduction .jumbotron h1 {
   font-family: Orbitron, sans-serif;
-  font-size: 4.5rem;
 }
 
 #application .card {
@@ -11006,5 +10999,15 @@ input.form-control,
   height: 60px;
   line-height: 60px;
   background-color: #f5f5f5;
+}
+
+@media (min-width: 768px) {
+  .eve-bg {
+    min-height: 830px;
+  }
+
+  .jumbotron h1 {
+    font-size: 4.5rem;
+  }
 }
 

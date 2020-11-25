@@ -32,7 +32,8 @@ class SsoController extends Controller
         $scopes = [
             'esi-characters.read_contacts.v1',
             'esi-skills.read_skills.v1',
-            'esi-characterstats.read.v1'
+            'esi-characterstats.read.v1',
+            'esi-contracts.read_corporation_contracts.v1'
         ];
 
         return $this->esi->authorize($scopes);

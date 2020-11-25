@@ -15,7 +15,7 @@ class EsiCorporations extends EsiClient
 
     /**
      * @param mixed $type
-     * @return EsiLocations
+     * @return EsiCorporations
      */
     public function setType($type)
     {

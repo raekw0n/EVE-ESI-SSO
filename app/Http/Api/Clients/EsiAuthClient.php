@@ -12,22 +12,22 @@ use Illuminate\Http\Request;
 class EsiAuthClient implements ClientInterface
 {
     /** @var string $server */
-    protected $server = 'tranquility';
+    protected string $server = 'tranquility';
 
-    /** @var EsiClient $client */
-    protected $client;
+    /** @var Client $client */
+    protected Client $client;
 
     /** @var string $base */
-    protected $base = 'https://login.eveonline.com';
+    protected string $base = 'https://login.eveonline.com';
+
+    /** @var string $code */
+    protected string $code;
 
     /** @var mixed $clientId */
     protected $clientId;
 
     /** @var mixed $secretKey */
     protected $secretKey;
-
-    /** @var string $code */
-    protected $code;
 
     /**
      * EsiAuthClient constructor.

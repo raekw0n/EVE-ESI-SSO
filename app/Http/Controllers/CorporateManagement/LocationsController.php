@@ -1,16 +1,16 @@
 <?php
 
-namespace Mesa\Http\Controllers;
+namespace Mesa\Http\Controllers\CorporateManagement;
 
-use Mesa\{Regions, Constellations, Systems, Stargates, Stations};
+use Mesa\{Http\Controllers\Controller, Region, Constellation, System, Stargate, Station};
 
 class LocationsController extends Controller
 {
-    protected static $mappings = [
-        'regions'        => Regions::class,
-        'constellations' => Constellations::class,
-        'systems'        => Systems::class,
-        'stations'       => Stations::class,
+    protected static array $mappings = [
+        'regions' => Region::class,
+        'constellations' => Constellation::class,
+        'systems' => System::class,
+        'stations' => Station::class,
     ];
 
     public function get($type, $id = null)

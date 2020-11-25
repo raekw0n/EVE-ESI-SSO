@@ -1,5 +1,8 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-white py-3">
-    <a class="navbar-brand" href="{{ route('home') }}"><img src="{{ asset('images/logo.png') }}" alt=""></a>
+    <a class="navbar-brand" href="{{ route('home') }}">
+        <img src="{{ asset('images/logo.png') }}" alt="" class="d-none d-md-flex">
+        <img src="{{ asset('images/logo-sm.png') }}" alt="" class="d-none d-sm-flex d-md-none">
+    </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -18,20 +21,20 @@
             </li>
         </ul>
         <ul class="navbar-nav ml-auto">
-            @if(!session()->get('character'))
+{{--            @if(session()->get('character'))--}}
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('esi.sso.login') }}">
                         <img class="img-fluid" src="{{ asset('images/eve-sso-login.png') }}" alt="">
                     </a>
                 </li>
-            @else
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        {{ session()->get('character')['name'] }}
-                        <img alt="portrait" class="ml-2" src="{{ session()->get('character')['portrait'] }}" width="36">
-                    </a>
-                </li>
-            @endif
+{{--            @else--}}
+{{--                <li class="nav-item">--}}
+{{--                    <a href="#" class="nav-link">--}}
+{{--                        {{ session()->get('character')['name'] }}--}}
+{{--                        <img alt="portrait" class="ml-2" src="{{ session()->get('character')['portrait'] }}" width="36">--}}
+{{--                    </a>--}}
+{{--                </li>--}}
+{{--            @endif--}}
         </ul>
     </div>
 </nav>

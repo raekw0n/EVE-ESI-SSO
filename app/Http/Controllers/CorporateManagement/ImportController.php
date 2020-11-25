@@ -1,6 +1,8 @@
 <?php
 
-namespace Mesa\Http\Controllers;
+namespace Mesa\Http\Controllers\CorporateManagement;
+
+use Mesa\Http\Controllers\Controller;
 
 /**
  * Import Controller.
@@ -8,7 +10,7 @@ namespace Mesa\Http\Controllers;
 class ImportController extends Controller
 {
     /** @var string */
-    protected $namespace = '\\Mesa\\Import\\';
+    protected string $namespace = '\\Mesa\\Import\\';
 
     /**
      * Import data from ESI.

@@ -16,8 +16,8 @@
     @endauth
     @yield('content')
 </main>
-<footer class="footer">
-    <div class="container">
+<footer class="footer py-2">
+    <div class="container text-center">
         <span class="text-muted">Copyright © {{ date('Y') }} {{ config('app.name') }}. All Rights Reserved</span>
     </div>
 </footer>

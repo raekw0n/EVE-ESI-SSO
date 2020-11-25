@@ -9,7 +9,7 @@ use Mesa\Http\Api\Clients\EsiAuthClient;
 /**
  * ESI Character Management.
  */
-class EsiCharacter extends EsiAuthClient
+class EsiCorporateManagement extends EsiAuthClient
 {
     /** @var mixed $token */
     private $token;
@@ -27,7 +27,7 @@ class EsiCharacter extends EsiAuthClient
     protected array $data = [];
 
     /**
-     * EsiCharacter constructor.
+     * EsiCorporateManagement constructor.
      *
      * @param $character
      */

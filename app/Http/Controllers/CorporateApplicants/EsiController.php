@@ -1,13 +1,13 @@
 <?php
 
-namespace Mesa\Http\Controllers\CorporateApplications;
+namespace Mesa\Http\Controllers\CorporateApplicants;
 
-use Mesa\Http\Api\EsiApplication;
+use Mesa\Http\Api\EsiCorporateApplicant;
 use Mesa\Http\Controllers\Controller;
 
 class EsiController extends Controller
 {
-    protected EsiApplication $applicant;
+    protected EsiCorporateApplicant $applicant;
 
     /**
      * EsiController constructor.
@@ -15,8 +15,8 @@ class EsiController extends Controller
     public function __construct()
     {
         $this->middleware(function($request, $next) {
-            if(session()->exists('character')) {
-                $this->applicant = new EsiApplication(session()->get('character'));
+            if (session()->exists('character')) {
+                $this->applicant = new EsiCorporateApplicant(session('character'));
 
                 return $next($request);
             }

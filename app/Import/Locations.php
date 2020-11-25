@@ -3,7 +3,7 @@
 namespace Mesa\Import;
 
 use Log;
-use Mesa\Http\Api\EsiLocations;
+use Mesa\Http\Api\Import\EsiLocations;
 use Mesa\{Region, Constellation, System, Stargate, Station};
 
 /**

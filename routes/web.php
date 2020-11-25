@@ -22,9 +22,9 @@ Route::group(['prefix' => 'eveauth'], function() {
 });
 
 Route::group(['prefix' => 'apply'], function() {
-    Route::get('', 'CorporateApplications\ApplicationsController@index')->name('apply');
-    Route::post('submit', 'CorporateApplications\ApplicationsController@submit')->name('apply.submit');
-    Route::get('info', 'CorporateApplications\CharacterController@getInforequiredForApplication')->name('apply.info');
+    Route::get('', 'CorporateApplicants\ApplicationsController@index')->name('apply');
+    Route::post('submit', 'CorporateApplicants\ApplicationsController@submit')->name('apply.submit');
+    Route::get('info', 'CorporateApplicants\CharacterController@getInforequiredForApplication')->name('apply.info');
 });
 
 Route::group(['prefix' => 'corporate', 'middleware' => ['esi.authenticated']], function() {

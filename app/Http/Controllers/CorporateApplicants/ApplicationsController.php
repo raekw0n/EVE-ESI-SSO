@@ -1,6 +1,6 @@
 <?php
 
-namespace Mesa\Http\Controllers\CorporateApplications;
+namespace Mesa\Http\Controllers\CorporateApplicants;
 
 use Log;
 use Mesa\Application;

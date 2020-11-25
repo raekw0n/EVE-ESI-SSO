@@ -2,12 +2,12 @@
 
 namespace Mesa\Http\Controllers\CorporateManagement;
 
-use Mesa\Http\Api\EsiCharacter;
+use Mesa\Http\Api\EsiCorporateManagement;
 use Mesa\Http\Controllers\Controller;
 
 class EsiController extends Controller
 {
-    protected EsiCharacter $character;
+    protected EsiCorporateManagement $character;
 
     /**
      * EsiController constructor.
@@ -16,7 +16,7 @@ class EsiController extends Controller
     {
         $this->middleware(function($request, $next) {
             if(session()->exists('character')) {
-                $this->character = new EsiCharacter(session()->get('character'));
+                $this->character = new EsiCorporateManagement(session('character'));
                 return $next($request);
             }
 

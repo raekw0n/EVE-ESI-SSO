@@ -2,7 +2,7 @@
 
 namespace Mesa\Http\Api\Clients;
 
-interface ClientInterface
+interface EsiClientInterface
 {
     /**
      * Fetch method for clients.

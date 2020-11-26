@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 /**
  * ESI auth client.
  */
-class EsiAuthClient implements ClientInterface
+class EsiAuthClient implements EsiClientInterface
 {
     /** @var string $server */
     protected string $server;
@@ -141,7 +141,6 @@ class EsiAuthClient implements ClientInterface
      */
     public function refreshAccessToken()
     {
-        Log::debug("Hit!");
         $response = $this->client->request('POST', '/v2/oauth/token', [
             'auth' => [
                 $this->clientId,

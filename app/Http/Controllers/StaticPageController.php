@@ -2,6 +2,8 @@
 
 namespace Mesa\Http\Controllers;
 
+use Illuminate\Routing\Controller;
+
 class StaticPageController extends Controller
 {
     /**

@@ -9,7 +9,7 @@ use GuzzleHttp\Exception\GuzzleException;
 /**
  * ESI client.
  */
-class EsiClient implements ClientInterface
+class EsiClient implements EsiClientInterface
 {
     /** @var Client $client */
     protected Client $client;

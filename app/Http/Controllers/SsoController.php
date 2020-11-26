@@ -4,20 +4,23 @@ namespace Mesa\Http\Controllers;
 
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Mesa\Http\Api\Clients\EsiAuthClient;
+use Illuminate\Routing\Controller;
 use GuzzleHttp\Exception\GuzzleException;
+use Mesa\Http\Api\Clients\EsiClientInterface;
 
 class SsoController extends Controller
 {
-    /** @var EsiAuthClient $esi */
-    protected EsiAuthClient $esi;
+    /** @var EsiClientInterface $esi */
+    protected EsiClientInterface $esi;
 
     /**
      * SsoController constructor.
+     *
+     * @param EsiClientInterface $esi
      */
-    public function __construct()
+    public function __construct(EsiClientInterface $esi)
     {
-        $this->esi = new EsiAuthClient();
+        $this->esi = $esi;
     }
 
     /**

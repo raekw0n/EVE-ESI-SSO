@@ -174,7 +174,7 @@ return [
         //Mesa\Providers\BroadcastServiceProvider::class,
         Mesa\Providers\EventServiceProvider::class,
         Mesa\Providers\RouteServiceProvider::class,
-//        Mesa\Providers\EsiServiceProvider::class
+        Mesa\Providers\EsiServiceProvider::class
 
     ],
 

@@ -2,6 +2,7 @@
 
 namespace Mesa\Http\Api\Clients;
 
+use Carbon\Carbon;
 use Log;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
@@ -133,12 +134,14 @@ class EsiAuthClient implements ClientInterface
     }
 
     /**
-     * Issue a refresh token.
+     * Refresh access token.
      *
      * @throws GuzzleException
+     * @return void
      */
-    public function refresh()
+    public function refreshAccessToken()
     {
+        Log::debug("Hit!");
         $response = $this->client->request('POST', '/v2/oauth/token', [
             'auth' => [
                 $this->clientId,
@@ -150,7 +153,13 @@ class EsiAuthClient implements ClientInterface
             ]
         ]);
 
-        return json_decode($response->getBody()->getContents());
+        $auth = json_decode($response->getBody()->getContents());
+        $expires_on = Carbon::parse(Carbon::now())->addSeconds($auth->expires_in)->toIso8601String();
+
+        session()->put('character.access_token', $auth->access_token);
+        session()->put('character.expires_on', $expires_on);
+        session()->put('character.refresh_token', $auth->refresh_token);
+        session()->save();
     }
 
     /**

@@ -2,6 +2,8 @@
 
 namespace Mesa\Http\Controllers\CorporateApplicants;
 
+use Carbon\Carbon;
+use Mesa\Http\Api\Clients\EsiAuthClient;
 use Mesa\Http\Api\EsiCorporateApplicant;
 use Mesa\Http\Controllers\Controller;
 
@@ -19,6 +21,10 @@ class BaseController extends Controller
             if (session()->exists('character'))
             {
                 $this->esi = new EsiCorporateApplicant(session('character'));
+                if (Carbon::parse(session('character')['expires_on'])->isPast())
+                {
+                    (new EsiAuthClient())->refreshAccessToken();
+                }
 
                 return $next($request);
             }

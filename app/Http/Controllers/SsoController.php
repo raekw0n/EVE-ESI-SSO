@@ -2,6 +2,7 @@
 
 namespace Mesa\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Mesa\Http\Api\Clients\EsiAuthClient;
 use GuzzleHttp\Exception\GuzzleException;
@@ -75,28 +76,13 @@ class SsoController extends Controller
     public function callback(Request $request)
     {
         $auth = $this->esi->callback($request);
+        $expires_on = Carbon::parse(Carbon::now())->addSeconds($auth->expires_in)->toIso8601String();
+
         session()->put('character.access_token', $auth->access_token);
-        session()->put('character.expires_in', $auth->expires_in);
+        session()->put('character.expires_on', $expires_on);
         session()->put('character.refresh_token', $auth->refresh_token);
 
         return $this->verify();
-    }
-
-    /**
-     * Verify login and return character information.
-     *
-     * @return mixed
-     * @throws GuzzleException
-     */
-    public function refresh()
-    {
-        $auth = $this->esi->refresh();
-        session()->put('character.access_token', $auth->access_token);
-        session()->put('character.expires_in', $auth->expires_in);
-        session()->put('character.refresh_token', $auth->refresh_token);
-
-
-        return redirect(route('home'))->with('logged_in', true);
     }
 
     /**

@@ -99,8 +99,7 @@ class EsiCorporateManagement extends EsiAuthClient
      */
     public function fetchCorporateBalances()
     {
-        if (Cache::has('corporate.wallets'))
-        {
+        if (Cache::has('corporate.wallets')) {
             $wallets = Cache::get('corporate.wallets');
         } else {
             $wallets = $this->fetch('/latest/corporations/' . config('eve.esi.corporation') . '/wallets');
@@ -169,7 +168,8 @@ class EsiCorporateManagement extends EsiAuthClient
             $total = count($contracts);
             foreach ($contracts as $contract)
             {
-                if (Contract::where('esi_contract_id', $contract->contract_id)->first() === null)
+                $model = Contract::where('esi_contract_id', $contract->contract_id)->first();
+                if ($model === null)
                 {
                     $model = new Contract;
                     $model->esi_contract_id = $contract->contract_id;
@@ -194,23 +194,20 @@ class EsiCorporateManagement extends EsiAuthClient
 
                     $model->date_accepted = isset($contract->date_accepted)
                         ? date('Y-m-d H:i:s', strtotime($contract->date_accepted)) : null;
+                }
 
-                    $model->date_completed = isset($contract->date_completed)
-                        ? date('Y-m-d H:i:s', strtotime($contract->date_completed)) : null;
+                $model->date_completed = isset($contract->date_completed)
+                    ? date('Y-m-d H:i:s', strtotime($contract->date_completed)) : null;
 
-                    $model->status = $contract->status;
+                $model->status = $contract->status;
 
-                    if ($model->save())
-                    {
-                        $this->updateStationsFromContract($model);
-                        ++$count;
-                    } else {
-                        ++$errors;
-                        Log::error('Failed to import contract: ' . $contract->contract_id);
-                    }
-
+                if ($model->save())
+                {
+                    $this->updateStationsFromContract($model);
+                    ++$count;
                 } else {
-                    --$total;
+                    ++$errors;
+                    Log::error('Failed to import contract: ' . $contract->contract_id);
                 }
             }
         } else {
@@ -218,14 +215,14 @@ class EsiCorporateManagement extends EsiAuthClient
         }
 
         return [
-            'imported' => $count,
+            'succeeded' => $count,
             'total' => $total,
             'errors' => $errors
         ];
     }
 
     /**
-     * Update stations from corporate contracts.
+     * Update stations from c   orporate contracts.
      *
      * @param Contract $contract
      * @return void

@@ -42,7 +42,7 @@
                 <div class="col-12">
                     <div class="card bg-white shadow border-0">
                         <div class="card-body">
-                            <table id="corporate_contracts" class="table table-sm table-responsive">
+                            <table id="corporate_contracts" class="table table-sm">
                                 <thead>
                                     <tr>
                                         <th scope="col">ESI ID</th>

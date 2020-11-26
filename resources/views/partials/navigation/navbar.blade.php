@@ -19,26 +19,26 @@
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('apply') }}"><i class="fas fa-plus"></i> Apply to Join</a>
             </li>
-            @esiauth
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="corporate_management" role="button"
-                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Corporation Management
-                </a>
-                <div class="dropdown-menu" aria-labelledby="corporate_management">
-                    <a class="dropdown-item nav-item" href="{{ route('corporate.management') }}"><i class="fas fa-star"></i> Dashboard</a>
-                    <a class="dropdown-item nav0item" href="{{ route('corporate.contracts') }}"><i class="fas fa-compass"></i> Contracts</a>
-                </div>
-            </li>
-            @endesiauth
+            @esicorporate
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="corporate_management" role="button"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Corporation Management
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="corporate_management">
+                        <a class="dropdown-item nav-item" href="{{ route('corporate.management') }}"><i class="fas fa-star"></i> Dashboard</a>
+                        <a class="dropdown-item nav0item" href="{{ route('corporate.contracts') }}"><i class="fas fa-compass"></i> Contracts</a>
+                    </div>
+                </li>
+            @endesicorporate
         </ul>
         <ul class="navbar-nav ml-auto">
             @esiauth
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="esi_auth_menu" role="button"
                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        {{ session('character')['name'] }}
-                        <img alt="portrait" class="ml-2" src="{{ session('character')['portrait'] }}" width="36">
+                        {{ session('character.name') }}
+                        <img alt="portrait" class="ml-2" src="{{ session('character.portrait') }}" width="36">
                     </a>
                     <div class="dropdown-menu" aria-labelledby="esi_auth_menu">
                         <a class="dropdown-item nav-item" href="{{ route('esi.sso.logout') }}">

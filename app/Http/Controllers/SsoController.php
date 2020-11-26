@@ -43,6 +43,8 @@ class SsoController extends Controller
      */
     public function corporateLogin()
     {
+        session()->put('character.corporate_member', true);
+
         $scopes = Scopes::pluck('name')->toArray();
 
         return $this->esi->authorize($scopes);

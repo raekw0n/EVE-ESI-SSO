@@ -2,6 +2,7 @@
 
 namespace Mesa\Providers;
 
+use Blade;
 use Illuminate\Support\ServiceProvider;
 
 use Mesa\Http\Api\Clients\EsiAuthClient;
@@ -30,5 +31,25 @@ class EsiServiceProvider extends ServiceProvider
             EsiClientInterface::class,
             EsiAuthClient::class
         );
+
+        Blade::if('esiauth', function ()
+        {
+            if (session('character'))
+            {
+                return true;
+            }
+
+            return false;
+        });
+
+        Blade::if('esicorporate', function ()
+        {
+            if (session('character.corporate_member'))
+            {
+                return true;
+            }
+
+            return false;
+        });
     }
 }

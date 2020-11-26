@@ -63,7 +63,7 @@ class EsiAuthClient implements EsiClientInterface
         try {
             $response = $this->client->request($method, $endpoint, [
                 'headers' => [
-                    'Authorization' => 'Bearer ' . session()->get('character.access_token')
+                    'Authorization' => 'Bearer ' . session('character.access_token')
                 ]
             ]);
         } catch (GuzzleException $e) {
@@ -148,7 +148,7 @@ class EsiAuthClient implements EsiClientInterface
             ],
             'form_params' => [
                 'grant_type' => 'refresh_token',
-                'refresh_token' => session('character')['refresh_token']
+                'refresh_token' => session('character.refresh_token')
             ]
         ]);
 
@@ -169,14 +169,14 @@ class EsiAuthClient implements EsiClientInterface
      */
     public function verify()
     {
-        if (!session()->exists('character.access_token'))
+        if (!session('character.access_token'))
         {
             return false;
         }
 
         $response = $this->client->request('GET', '/oauth/verify', [
             'headers' => [
-                'Authorization' => 'Bearer ' . session()->get('character.access_token')
+                'Authorization' => 'Bearer ' . session('character.access_token')
             ]
         ]);
 

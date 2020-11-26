@@ -25,10 +25,10 @@ class BaseController extends Controller
         $this->auth = $auth;
 
         $this->middleware(function($request, $next) {
-            if (session()->exists('character'))
+            if (session('character'))
             {
                 $this->esi = new EsiCorporateApplicant(session('character'));
-                if (Carbon::parse(session('character')['expires_on'])->isPast())
+                if (Carbon::parse(session('character.expires_on'))->isPast())
                 {
                     $this->auth->refreshAccessToken();
                 }

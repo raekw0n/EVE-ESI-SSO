@@ -24,12 +24,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Blade::if('esiauth', function () {
-            if(session()->exists('character')) {
-                return true;
-            }
 
-            return false;
-        });
     }
 }

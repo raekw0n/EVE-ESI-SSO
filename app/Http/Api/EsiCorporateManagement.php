@@ -4,6 +4,7 @@ namespace Mesa\Http\Api;
 
 use Log;
 use Cache;
+use Mesa\Region;
 use Mesa\Station;
 use Mesa\Contract;
 use Mesa\Http\Api\Clients\EsiAuthClient;
@@ -149,6 +150,14 @@ class EsiCorporateManagement extends EsiAuthClient
         }
 
         return $transactions;
+    }
+
+    /**
+     * Fetch available contracts for region.
+     */
+    public function fetchAvailableContracts()
+    {
+        $region = Region::where('name', 'The Forge')->pluck('region_id')->first();
     }
 
     /**

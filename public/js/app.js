@@ -65679,11 +65679,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_8__["library"].add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_9__["faArrowLeft"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_9__["faArrowRight"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_9__["faCompass"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_9__["faHome"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_9__["faPlus"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_9__["faTruck"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_9__["faRocket"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_9__["faWrench"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_9__["faStar"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_9__["faUser"]);
+_fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_8__["library"].add(_fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_9__["faArrowLeft"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_9__["faArrowRight"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_9__["faCompass"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_9__["faHome"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_9__["faPlus"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_9__["faTruck"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_9__["faRocket"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_9__["faWrench"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_9__["faStar"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_9__["faUser"], _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_9__["faSignOutAlt"]);
 _fortawesome_fontawesome_svg_core__WEBPACK_IMPORTED_MODULE_8__["dom"].watch();
 window.Toast = sweetalert2__WEBPACK_IMPORTED_MODULE_5___default.a.mixin({
   toast: true,
-  position: 'top-end',
+  position: 'bottom-end',
   animation: false,
   showConfirmButton: false,
   timer: 5000,

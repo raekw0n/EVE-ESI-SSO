@@ -34,11 +34,17 @@
         </ul>
         <ul class="navbar-nav ml-auto">
             @esiauth
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="esi_auth_menu" role="button"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         {{ session('character')['name'] }}
                         <img alt="portrait" class="ml-2" src="{{ session('character')['portrait'] }}" width="36">
                     </a>
+                    <div class="dropdown-menu" aria-labelledby="esi_auth_menu">
+                        <a class="dropdown-item nav-item" href="{{ route('esi.sso.logout') }}">
+                            <i class="fas fa-sign-out-alt"></i> Logout
+                        </a>
+                    </div>
                 </li>
             @else
                 <li class="nav-item">

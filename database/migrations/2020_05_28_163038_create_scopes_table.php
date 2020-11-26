@@ -17,6 +17,7 @@ class CreateScopesTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('key');
+            $table->string('access')->nullable();
             $table->timestamps();
         });
     }

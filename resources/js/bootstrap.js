@@ -18,14 +18,15 @@ import {
     faWrench,
     faStar,
     faUser,
+    faSignOutAlt
 } from '@fortawesome/free-solid-svg-icons';
 
-library.add(faArrowLeft, faArrowRight, faCompass, faHome, faPlus, faTruck, faRocket, faWrench, faStar, faUser);
+library.add(faArrowLeft, faArrowRight, faCompass, faHome, faPlus, faTruck, faRocket, faWrench, faStar, faUser, faSignOutAlt);
 dom.watch();
 
 window.Toast = Swal.mixin({
     toast: true,
-    position: 'top-end',
+    position: 'bottom-end',
     animation: false,
     showConfirmButton: false,
     timer: 5000,

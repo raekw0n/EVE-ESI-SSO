@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use GuzzleHttp\Exception\GuzzleException;
 use Mesa\Http\Api\Clients\EsiClientInterface;
+use Mesa\Scopes;
 
 class SsoController extends Controller
 {
@@ -30,11 +31,7 @@ class SsoController extends Controller
      */
     public function login()
     {
-        $scopes = [
-            'esi-characters.read_contacts.v1',
-            'esi-skills.read_skills.v1',
-            'esi-characterstats.read.v1'
-        ];
+        $scopes = Scopes::where('access', 'all')->pluck('name')->toArray();
 
         return $this->esi->authorize($scopes);
     }
@@ -46,27 +43,19 @@ class SsoController extends Controller
      */
     public function corporateLogin()
     {
-        $scopes = [
-            'esi-characters.read_contacts.v1',
-            'esi-skills.read_skills.v1',
-            'esi-characterstats.read.v1',
-            'esi-corporations.read_structures.v1',
-            'esi-corporations.read_standings.v1',
-            'esi-corporations.read_divisions.v1',
-            'esi-corporations.read_corporation_membership.v1',
-            'esi-corporations.track_members.v1',
-            'esi-corporations.read_facilities.v1',
-            'esi-killmails.read_corporation_killmails.v1',
-            'esi-contracts.read_corporation_contracts.v1',
-            'esi-wallet.read_corporation_wallets.v1',
-            'esi-planets.read_customs_offices.v1',
-            'esi-markets.read_corporation_orders.v1',
-            'esi-markets.read_corporation_orders.v1',
-            'esi-industry.read_corporation_jobs.v1',
-            'esi-killmails.read_corporation_killmails.v1',
-        ];
+        $scopes = Scopes::pluck('name')->toArray();
 
         return $this->esi->authorize($scopes);
+    }
+
+    /**
+     * Forget SSO character tokens
+     */
+    public function logout()
+    {
+        session()->forget('character');
+
+        return redirect()->home();
     }
 
     /**

@@ -26,6 +26,9 @@ class EsiServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->app->bind(EsiClientInterface::class, EsiAuthClient::class);
+        $this->app->bind(
+            EsiClientInterface::class,
+            EsiAuthClient::class
+        );
     }
 }

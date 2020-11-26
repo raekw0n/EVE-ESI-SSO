@@ -4,7 +4,6 @@ namespace Mesa\Http\Controllers\CorporateApplicants;
 
 use Carbon\Carbon;
 use Illuminate\Routing\Controller;
-use Mesa\Http\Api\Clients\EsiAuthClient;
 use Mesa\Http\Api\Clients\EsiClientInterface;
 use Mesa\Http\Api\EsiCorporateApplicant;
 

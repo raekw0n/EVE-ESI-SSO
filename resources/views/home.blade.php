@@ -21,7 +21,7 @@
                                     <div class="card filter" style="height: initial;">
                                         <div class="card-body">
                                             <h2 class="text-success">27</h2>
-                                            <small>Contracts completed this week</small>
+                                            <small>Contracts completed this week.</small>
                                         </div>
                                     </div>
                                 </div>
@@ -35,7 +35,7 @@
                                 </div>
                             </div>
                             <div class="row py-4">
-                                <div class="col-12 col-md-8">
+                                <div class="col-12 col-md-8 col-lg-4">
                                     <div class="card filter">
                                         <div class="card-body">
                                         @include('partials.calculators.haulage')

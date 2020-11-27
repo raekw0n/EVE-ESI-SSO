@@ -18,10 +18,11 @@ import {
     faWrench,
     faStar,
     faUser,
-    faSignOutAlt
+    faSignOutAlt,
+    faQuestionCircle
 } from '@fortawesome/free-solid-svg-icons';
 
-library.add(faArrowLeft, faArrowRight, faCompass, faHome, faPlus, faTruck, faRocket, faWrench, faStar, faUser, faSignOutAlt);
+library.add(faArrowLeft, faArrowRight, faCompass, faHome, faPlus, faTruck, faRocket, faWrench, faStar, faUser, faSignOutAlt, faQuestionCircle);
 dom.watch();
 
 window.Toast = Swal.mixin({

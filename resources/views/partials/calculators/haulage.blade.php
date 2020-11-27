@@ -22,22 +22,25 @@
     </div>
 
     <div class="form-row mt-3">
-        <div class="col">
-            <div class="form-row">
-                <div class="col">
-                    <input type="checkbox" tabindex="3" id="rush">
-                    <label for="rush">Rush Delivery</label>
+        <div class="col-12 d-flex align-items-center">
+            <div class="col-6">
+                <div class="form-row">
+                    <div class="col">
+                        <input type="checkbox" tabindex="3" id="rush">
+                        <label for="rush">Rush Delivery</label>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col">
+                        <input type="checkbox" tabindex="4" id="lowsec">
+                        <label for="lowsec">Through Lowsec</label>
+                    </div>
                 </div>
             </div>
-            <div class="form-row">
-                <div class="col">
-                    <input type="checkbox" tabindex="4" id="lowsec">
-                    <label for="lowsec">Through Lowsec</label>
-                </div>
+            <div class="col-6">
+                <button class="btn btn-outline-light" id="calculate" type="button">Calculate</button>
+                <a class="ml-2 text-muted" href="{{ route('haulage') }}"><i class="fas fa-question-circle"></i> Instructions</a>
             </div>
-        </div>
-        <div class="col align-self-center">
-            <button class="btn btn-outline-light" id="calculate" type="button">Calculate</button>
         </div>
     </div>
 </div>

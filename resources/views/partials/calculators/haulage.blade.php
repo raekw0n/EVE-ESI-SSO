@@ -1,4 +1,9 @@
 <div id="haulage-calculator">
+    <div class="row pb-3">
+        <div class="col-12">
+            <i class="text-warning fas fa-exclamation-circle"></i> <small>Cargo size limited to 200,000m<sub>3</sub>, Collateral value limited to 2 billion ISK</small>
+        </div>
+    </div>
     <div class="form-row">
         <div class="col">
             <label for="collateral">Collateral</label>
@@ -39,7 +44,7 @@
             </div>
             <div class="col-6">
                 <button class="btn btn-outline-light" id="calculate" type="button">Calculate</button>
-                <a class="ml-2 text-muted" href="{{ route('haulage') }}"><i class="fas fa-question-circle"></i> Instructions</a>
+                <a class="ml-2 text-light" href="{{ route('haulage') }}"><i class="fas fa-question-circle"></i> Instructions</a>
             </div>
         </div>
     </div>

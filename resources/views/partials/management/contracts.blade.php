@@ -29,14 +29,17 @@
                     </thead>
                     <tbody>
                     @foreach($contracts as $contract)
-                        <tr class="{{ $contract->status === 'finished' ? 'alert-success' : 'alert-warning' }}">
+                        <tr class="{{ set_status_alert_level($contract->status) }}">
                             <td>{{ $contract->esi_contract_id }}</td>
                             <td>{{ number_format($contract->volume, 2) }}<sub>m3</sub></td>
                             <td>{{ number_format($contract->collateral, 2) }} ISK</td>
                             <td>{{ number_format($contract->reward, 2) }} ISK</td>
                             <td>{{ date('jS M H:i:s', strtotime($contract->date_issued)) }}</td>
                             <td>{{ date('jS M H:i:s', strtotime($contract->date_expires)) }}</td>
-                            <td>{{ $contract->date_completed ? date('jS M H:i:s', strtotime($contract->date_completed)) : 'TBC' }}</td>
+                            <td>{{ $contract->date_completed
+                                   ? date('jS M H:i:s', strtotime($contract->date_completed))
+                                   : set_completed_on_text($contract->status) }}
+                            </td>
                             <td>{{ ucwords(str_replace("_", " ", $contract->status)) }}</td>
                         </tr>
                     @endforeach

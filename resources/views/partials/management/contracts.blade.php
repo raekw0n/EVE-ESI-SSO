@@ -1,3 +1,13 @@
+@section('additional_styles')
+    @parent
+    <style>
+        select#status-filter {
+            width: 160px;
+            display: inline-block;
+        }
+    </style>
+@endsection
+
 <div class="row mt-4">
     <div class="col-12 d-flex align-items-center justify-content-between">
         <h2>Courier Contracts</h2>
@@ -8,11 +18,13 @@
     <div class="col-12">
         <div class="card p-2 bg-white shadow border-0">
             <div class="card-body">
-                <div class="pb-4 text-right">
-                    <form action="{{ route('corporate.contracts.update') }}" method="POST">
-                        @csrf
-                        <button class="btn btn-sm btn-secondary" type="submit" id="update_contracts">Update Contracts</button>
-                    </form>
+                <div class="row">
+                    <div class="col-12 pb-4 d-flex align-items-center justify-content-between">
+                        <form action="{{ route('corporate.contracts.update') }}" method="POST">
+                            @csrf
+                            <button class="btn btn-sm btn-secondary" type="submit" id="update_contracts">Update Contracts</button>
+                        </form>
+                    </div>
                 </div>
                 <table id="corporate_contracts" class="table table-sm">
                     <thead>
@@ -50,12 +62,39 @@
     </div>
 </div>
 @include('partials.alert')
+
 @section('additional_scripts')
     @parent
     <script>
-        $(document).ready(function() {
-            $('#corporate_contracts').DataTable({
+        $(document).ready(() => {
+            $.fn.dataTable.ext.search.push((settings, data) => {
+                    let status = $('#status-filter option:selected').val();
+                    let col = data[7].toLowerCase().replace(" ", "_");
+
+                    if (status === col || status === 'all' || status === undefined) {
+                        return data;
+                    }
+                }
+            );
+
+            let table = $('#corporate_contracts').DataTable({
                 order: [[ 6, "desc" ]]
+            });
+
+            let filter = '<label class="ml-3">Filter by status: ' +
+                '             <select class="form-control form-control-sm" name="status-filter" id="status-filter">\n' +
+                '                 <option value="all" selected></option>\n' +
+                '                 <option value="failed">Failed</option>\n' +
+                '                 <option value="finished">Finished</option>\n' +
+                '                 <option value="in_progress">In Progress</option>\n' +
+                '                 <option value="outstanding">Outstanding</option>\n' +
+                '             </select>' +
+                '         </label>';
+
+            $('#corporate_contracts_filter').append(filter);
+
+            $('#status-filter').change(() => {
+                table.draw();
             });
         })
     </script>

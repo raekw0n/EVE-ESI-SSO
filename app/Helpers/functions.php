@@ -16,10 +16,12 @@ if (!function_exists('set_status_alert_level'))
         if ($status === 'finished')
         {
             $level = 'alert-success';
-        } else if ($status === 'deleted' || $status === 'expired') {
-            $level = 'alert-danger';
+        } else if ($status === 'deleted') {
+            $level = 'alert-dark';
         } else if($status === 'outstanding') {
             $level = 'alert-warning';
+        } else if ($status === 'failed') {
+            $level = 'alert-danger';
         } else {
             $level = 'alert-info';
         }

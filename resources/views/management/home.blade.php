@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('additional_styles')
+    @parent
 @endsection
 
 @section('content')

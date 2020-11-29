@@ -13,6 +13,11 @@ class WalletDivision extends Model
         return $this->hasMany(WalletJournal::class, 'division_id', 'division_id');
     }
 
+    public function orders()
+    {
+        return $this->hasMany(OrderHistory::class, 'wallet_division', 'division_id');
+    }
+
     public function transactions()
     {
         return $this->hasMany(WalletTransaction::class, 'division_id', 'division_id');

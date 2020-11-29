@@ -2,6 +2,7 @@
 
 namespace Mesa\Http\Controllers\CorporateManagement;
 
+use Mesa\OrderHistory;
 use Mesa\WalletJournal;
 use Illuminate\Http\Request;
 
@@ -11,8 +12,8 @@ class FinanceController extends BaseController
     {
         $finances['ledger'] = $this->esi->buildCorporateLedger();
         $finances['journal'] = WalletJournal::with('division')->get();
-
         $finances['total'] = 0;
+
         foreach ($finances['ledger'] as $idx => $division)
         {
             $finances['total'] += $division->balance;

@@ -4,6 +4,7 @@ namespace Mesa\Http\Api;
 
 use Log;
 use Cache;
+use Mesa\OrderHistory;
 use Mesa\Region;
 use Mesa\Station;
 use Mesa\Contract;
@@ -154,9 +155,84 @@ class EsiCorporateManagement extends EsiAuthClient
     }
 
     /**
+     * Fetch corporate order history.
+     *
+     * @return mixed
+     */
+    public function fetchCorporateOrderHistory()
+    {
+        return $this->fetch('/latest/corporations/'
+            . config('eve.esi.corporation')
+            . '/orders/history');
+    }
+
+    /**
+     * Update order history.
+     *
+     * @param mixed $orders
+     */
+    public function updateDataAccessOrderHistory($orders = null)
+    {
+        if (is_null($orders))
+        {
+            $orders = $this->fetchCorporateOrderHistory();
+        }
+
+        $count = 0;
+        $total = 0;
+        $errors = 0;
+
+        if ($orders)
+        {
+            $total = count($orders);
+            foreach ($orders as $order)
+            {
+                if (OrderHistory::where('order_id', $order->order_id)->first() === null)
+                {
+                    $model = new OrderHistory();
+
+                    $model->escrow = $order->escrow ?? 0;
+                    $model->is_buy_order = $order->is_buy_order ?? false;
+                    $model->created_at = $order->issued;
+                    $model->updated_at = $order->issued;
+                    $model->issued_by = $order->issued_by;
+                    $model->location_id = $order->location_id;
+                    $model->order_id = $order->order_id;
+                    $model->price = $order->price;
+                    $model->region_id = $order->region_id;
+                    $model->state = $order->state;
+                    $model->type_id = $this->fetch('/latest/universe/types/'.$order->type_id)->name ?? $order->type_id;
+                    $model->volume_min = $order->min_volume ?? 0;
+                    $model->volume_remain = $order->volume_remain ?? 0;
+                    $model->volume_total = $order->volume_total ?? 0;
+                    $model->wallet_division = $order->wallet_division;
+
+                    if ($model->save())
+                    {
+                        ++$count;
+                    } else {
+                        ++$errors;
+                        Log::error('Failed to import order: ' . $order->order_id);
+                    }
+                } else {
+                    --$total;
+                }
+            }
+        } else {
+            ++$errors;
+        }
+
+        return [
+            'succeeded' => $count,
+            'total' => $total,
+            'errors' => $errors
+        ];
+    }
+
+    /**
      * Update journals and transactions.
      *
-     * @param null $ledger
+     * @param mixed $ledger
      */
     public function updateDataAccessJournalTransactions($ledger = null)
     {

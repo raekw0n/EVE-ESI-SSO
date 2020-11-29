@@ -23,12 +23,13 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="corporate_management" role="button"
                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Corporation Management
+                        <i class="fas fa-star"></i> Corporation Management
                     </a>
                     <div class="dropdown-menu" aria-labelledby="corporate_management">
-                        <a class="dropdown-item nav-item" href="{{ route('corporate.management') }}"><i class="fas fa-star"></i> Dashboard</a>
-                        <a class="dropdown-item nav-item" href="{{ route('corporate.contracts') }}"><i class="fas fa-compass"></i> Contracts</a>
-                        <a class="dropdown-item nav-item" href="{{ route('corporate.finances') }}"><i class="fas fa-dollar-sign"></i> Finances</a>
+                        <a class="dropdown-item nav-item" href="{{ route('corporate.management') }}">Dashboard</a>
+                        <a class="dropdown-item nav-item" href="{{ route('corporate.contracts') }}">Contracts</a>
+                        <a class="dropdown-item nav-item" href="{{ route('corporate.finances') }}">Finances</a>
+                        <a class="dropdown-item nav-item" href="{{ route('corporate.orders') }}">Orders</a>
                     </div>
                 </li>
             @endesicorporate

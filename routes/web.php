@@ -35,6 +35,8 @@ Route::group(['prefix' => 'corporate'], function() {
     Route::post('contracts', 'CorporateManagement\ContractsController@updateContractsFromEsi')->name('corporate.contracts.update');
     Route::get('finances', 'CorporateManagement\FinanceController@index')->name('corporate.finances');
     Route::post('finances', 'CorporateManagement\FinanceController@updateJournalTransactionsFromEsi')->name('corporate.finances.update');
+    Route::get('orders', 'CorporateManagement\OrdersController@index')->name('corporate.orders');
+    Route::post('orders', 'CorporateManagement\OrdersController@updateOrderHistoryFromEsi')->name('corporate.orders.update');
 });
 
 Route::group(['prefix' => 'services'], function() {

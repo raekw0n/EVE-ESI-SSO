@@ -4,20 +4,19 @@
 @endsection
 
 @section('content')
-    <div id="finances">
+    <div id="order-history">
         <div class="container py-2">
             <div class="row mt-3">
                 <div class="col-12">
-                    <h1>{{ config('app.name') }} Financial Management</h1>
+                    <h1>{{ config('app.name') }} Order Management</h1>
                 </div>
             </div>
             <hr>
             @include('partials.management.balances')
-            @include('partials.management.ledger')
+            @include('partials.management.orders')
         </div>
     </div>
 @endsection
 
 @section('additional_scripts')
 @endsection
-

@@ -4,13 +4,13 @@
 @endsection
 
 @section('content')
-    <div id="application">
+    <div id="confirmation" class="eve-bg text-light">
         <div class="container py-4">
             <div class="row mt-3">
                 <div class="col-md-12">
                     <div class="card filter">
                         <div class="card-header">
-                            Application received for {{ $character }}
+                            <h2>Application Received</h2>
                         </div>
                         <div class="card-body">
                             <p>

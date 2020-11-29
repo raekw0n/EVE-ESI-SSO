@@ -48,6 +48,7 @@ class ApplicationsController extends BaseController
         $application->reason_joining = $request->get('reason_joining');
         $application->real_life = $request->get('real_life');
         $application->haiku = $request->get('haiku');
+        $application->status = 'New';
 
         $application->character_raw_data = json_encode($information);
 
@@ -58,7 +59,7 @@ class ApplicationsController extends BaseController
 
         return view('apply.confirmation', [
             'character' => $information['name'],
-            'message' => 'Success! your application has been received. Please keep an eye on your EVEmail, we\'ll send you an invite or an update shortly.'
+            'message' => 'Success! your application has been received. Please keep an eye on your EVEmail, we\'ll send you an invite or an update within 24 hours.'
         ]);
     }
 }

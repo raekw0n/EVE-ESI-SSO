@@ -17,12 +17,13 @@ class CreateApplicationsTable extends Migration
             $table->id();
             $table->string('character_name');
             $table->string('character_corporation');
-            $table->longText('character_raw_data');
+            $table->json('character_raw_data');
             $table->text('length_playing');
             $table->text('favourite_activities');
             $table->text('reason_joining');
             $table->text('real_life')->nullable();
-            $table->text('haiku');
+            $table->text('haiku')->nullable();
+            $table->string('status');
             $table->timestamps();
         });
     }

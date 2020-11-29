@@ -25,7 +25,7 @@
                         </form>
                     </div>
                 </div>
-                <table id="corporate_orders" class="table table-sm">
+                <table id="corporate_orders" class="table table-sm table-striped">
                     <thead>
                     <tr>
                         <th scope="col">ESI ID</th>
@@ -33,13 +33,13 @@
                         <th scope="col">Buy/Sell</th>
                         <th scope="col">Item</th>
                         <th scope="col">Price</th>
-                        <th scope="col">Total Volume</th>
+                        <th scope="col">Volume</th>
                         <th scope="col">Created On</th>
                     </tr>
                     </thead>
                     <tbody>
                     @foreach($finances['orders'] as $row)
-                        <tr class="{{set_positive_negative_alert_level($row->is_buy_order===1?'Buy':'Sell')}}">
+                        <tr>
                             <td>{{ $row->order_id }}</td>
                             <td>{{ $row->division->division_name ?? 'N/A' }}</td>
                             <td>{{ $row->is_buy_order === 1 ? 'Buy' : 'Sell' }}</td>

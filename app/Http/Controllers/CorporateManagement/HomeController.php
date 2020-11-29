@@ -2,6 +2,7 @@
 
 namespace Mesa\Http\Controllers\CorporateManagement;
 
+use Mesa\Application;
 use Mesa\Contract;
 
 class HomeController extends BaseController
@@ -23,6 +24,8 @@ class HomeController extends BaseController
             $finances['total'] += $division->balance;
         }
 
-        return view('management.home', compact('contracts', 'finances'));
+        $applications = Application::all();
+
+        return view('management.home', compact('contracts', 'finances', 'applications'));
     }
 }

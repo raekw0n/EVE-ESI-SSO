@@ -31,6 +31,9 @@ Route::group(['prefix' => 'apply'], function() {
 
 Route::group(['prefix' => 'corporate'], function() {
     Route::get('management', 'CorporateManagement\HomeController@index')->name('corporate.management');
+    Route::get('applications', 'CorporateManagement\ApplicationsController@index')->name('corporate.applications');
+    Route::get('applications/{applicant}', 'CorporateManagement\ApplicationsController@view')->name('corporate.applications.view');
+    Route::put('applications/{applicant}', 'CorporateManagement\ApplicationsController@decideApplication')->name('corporate.applications.update');
     Route::get('contracts', 'CorporateManagement\ContractsController@index')->name('corporate.contracts');
     Route::post('contracts', 'CorporateManagement\ContractsController@updateContractsFromEsi')->name('corporate.contracts.update');
     Route::get('finances', 'CorporateManagement\FinanceController@index')->name('corporate.finances');

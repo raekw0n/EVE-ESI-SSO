@@ -26,7 +26,7 @@
                         </form>
                     </div>
                 </div>
-                <table id="corporate_finances" class="table table-sm table-hover">
+                <table id="corporate_finances" class="table table-sm table-striped table-hover">
                     <thead>
                     <tr>
                         <th scope="col">ESI ID</th>
@@ -39,7 +39,7 @@
                     </thead>
                     <tbody>
                     @foreach($finances['journal'] as $row)
-                        <tr class="{{ set_positive_negative_alert_level($row->amount) }}">
+                        <tr>
                             <td>{{ $row->journal_id }}</td>
                             <td>{{ $row->division->division_name }}</td>
                             <td>

@@ -15,6 +15,7 @@
     @auth
     @endauth
     @yield('content')
+    @include('partials.alert')
 </main>
 <footer class="footer py-2">
     <div class="container text-center">

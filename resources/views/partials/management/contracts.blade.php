@@ -61,7 +61,6 @@
         </div>
     </div>
 </div>
-@include('partials.alert')
 
 @section('additional_scripts')
     @parent

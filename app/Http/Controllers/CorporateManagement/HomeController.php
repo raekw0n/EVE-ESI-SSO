@@ -14,18 +14,13 @@ class HomeController extends BaseController
     public function index()
     {
         $contracts = Contract::where('type', 'courier')->get();
-        $balances = $this->esi->fetchCorporateBalances();
-        $divisions = $this->esi->fetchCorporateDivisions('wallet');
 
-        $finances['ledger'] = [];
+        $finances['ledger'] = $this->esi->buildCorporateLedger();
         $finances['total'] = 0;
-        if ($balances && $divisions)
+
+        foreach ($finances['ledger'] as $idx => $division)
         {
-            $finances['ledger'] = $this->esi->buildCorporateLedger($divisions, $balances);
-            foreach ($finances['ledger'] as $idx => $division)
-            {
-                $finances['total'] += $division->balance;
-            }
+            $finances['total'] += $division->balance;
         }
 
         return view('management.home', compact('contracts', 'finances'));

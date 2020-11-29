@@ -25,7 +25,7 @@ class ContractsController extends BaseController
      */
     public function updateContractsFromEsi(Request $request)
     {
-        $contracts = $this->esi->updateContracts();
+        $contracts = $this->esi->updateDataAccessContracts();
         if ($contracts['errors'] > 0)
         {
             $request->session()->flash('error', 'Could not fetch contracts from the ESI, please check the logs.');

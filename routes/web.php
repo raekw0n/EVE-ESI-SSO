@@ -33,6 +33,8 @@ Route::group(['prefix' => 'corporate'], function() {
     Route::get('management', 'CorporateManagement\HomeController@index')->name('corporate.management');
     Route::get('contracts', 'CorporateManagement\ContractsController@index')->name('corporate.contracts');
     Route::post('contracts', 'CorporateManagement\ContractsController@updateContractsFromEsi')->name('corporate.contracts.update');
+    Route::get('finances', 'CorporateManagement\FinanceController@index')->name('corporate.finances');
+    Route::post('finances', 'CorporateManagement\FinanceController@updateJournalTransactionsFromEsi')->name('corporate.finances.update');
 });
 
 Route::group(['prefix' => 'services'], function() {

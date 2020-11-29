@@ -8,6 +8,8 @@ use Mesa\Region;
 use Mesa\Station;
 use Mesa\Contract;
 use Mesa\Http\Api\Clients\EsiAuthClient;
+use Mesa\WalletJournal;
+use Mesa\WalletTransaction;
 
 /**
  * ESI Corporate Management.
@@ -46,27 +48,53 @@ class EsiCorporateManagement extends EsiAuthClient
     /**
      * Build corporate ledger.
      *
-     * @param $divisions
-     * @param $balances
-     * @return array
+     * @param bool $withTransactionJournal
+     * @return mixed
      */
-    public function buildCorporateLedger($divisions, $balances)
+    public function buildCorporateLedger($withTransactionJournal = false, $fromDataAccess = false)
     {
-        unset($divisions[0], $balances[0]); // Unset unused Master division.
-        foreach ($balances as $balance)
+        $divisions = $this->fetchCorporateDivisions('wallet');
+        $balances = $this->fetchCorporateBalances();
+
+        if ($divisions && $balances)
         {
-            foreach ($divisions as $idx => $division)
+            array_shift($divisions);
+            array_shift($balances);
+
+            foreach ($divisions as $i => $division)
             {
-                if ($balance->division === $division->division)
+                foreach ($balances as $x => $balance)
                 {
-                    $divisions[$idx]->balance = $balance->balance;
-                    $divisions[$idx]->transactions = $this->fetchCorporateTransactions($balance->division);
-                    $divisions[$idx]->journal = $this->fetchCorporateJournal($balance->division);
+                    if ($balance->division === $division->division)
+                    {
+                        $divisions[$x]->balance = $balance->balance;
+
+                        if ($withTransactionJournal)
+                        {
+                            if ($fromDataAccess)
+                            {
+                                $divisions[$x]->transactions = WalletTransaction::where(
+                                    'division_id',
+                                    $balance->division
+                                )->get()->toArray();
+
+                                $divisions[$x]->journal = WalletJournal::where(
+                                    'division_id',
+                                    $balance->division
+                                )->get()->toArray();
+                            } else {
+                                $divisions[$x]->transactions = $this->fetchCorporateTransactions($balance->division);
+                                $divisions[$x]->journal = $this->fetchCorporateJournal($balance->division);
+                            }
+                        }
+                    }
                 }
             }
+
+            return $divisions;
         }
 
-        return $divisions;
+        return false;
     }
 
     /**
@@ -77,17 +105,11 @@ class EsiCorporateManagement extends EsiAuthClient
      */
     public function fetchCorporateDivisions($type = null)
     {
-        if (Cache::has('corporate.divisions'))
-        {
-            $divisions = Cache::get('corporate.divisions');
-        } else {
-            $divisions = $this->fetch('/latest/corporations/' . config('eve.esi.corporation') . '/divisions');
-            Cache::put('corporate.divisions', $divisions, 3600);
-        }
+        $divisions = $this->fetch('/latest/corporations/' . config('eve.esi.corporation') . '/divisions');
 
         if (!is_null($type))
         {
-            return $divisions->{$type};
+            $divisions = isset($divisions->{$type}) ? $divisions->{$type} : $divisions;
         }
 
         return $divisions;
@@ -100,14 +122,9 @@ class EsiCorporateManagement extends EsiAuthClient
      */
     public function fetchCorporateBalances()
     {
-        if (Cache::has('corporate.wallets')) {
-            $wallets = Cache::get('corporate.wallets');
-        } else {
-            $wallets = $this->fetch('/latest/corporations/' . config('eve.esi.corporation') . '/wallets');
-            Cache::put('corporate.wallets', $wallets, 3600);
-        }
-
-        return $wallets;
+        return $this->fetch('/latest/corporations/'
+            . config('eve.esi.corporation')
+            . '/wallets');
     }
 
     /**
@@ -118,17 +135,9 @@ class EsiCorporateManagement extends EsiAuthClient
      */
     public function fetchCorporateJournal($division)
     {
-        if (Cache::has('corporate.journal'))
-        {
-            $journal = Cache::get('corporate.journal');
-        } else {
-            $journal = $this->fetch('/latest/corporations/'
-                . config('eve.esi.corporation')
-                . '/wallets/' . $division . '/journal');
-            Cache::put('corporate.journal', $journal);
-        }
-
-        return $journal;
+        return $this->fetch('/latest/corporations/'
+            . config('eve.esi.corporation')
+            . '/wallets/' . $division . '/journal');
     }
 
     /**
@@ -139,25 +148,66 @@ class EsiCorporateManagement extends EsiAuthClient
      */
     public function fetchCorporateTransactions($division)
     {
-        if (Cache::has('corporate.transactions'))
-        {
-            $transactions = Cache::get('corporate.transactions');
-        } else {
-            $transactions = $this->fetch('/latest/corporations/'
-                . config('eve.esi.corporation')
-                . '/wallets/' . $division . '/transactions');
-            Cache::put('corporate.transactions', $transactions);
-        }
-
-        return $transactions;
+        return $this->fetch('/latest/corporations/'
+            . config('eve.esi.corporation')
+            . '/wallets/' . $division . '/transactions');
     }
 
     /**
-     * Fetch available contracts for region.
+     * Update journals and transactions.
+     *
+     * @param null $ledger
      */
-    public function fetchAvailableContracts()
+    public function updateDataAccessJournalTransactions($ledger = null)
     {
-        $region = Region::where('name', 'The Forge')->pluck('region_id')->first();
+        if(is_null($ledger))
+        {
+            $ledger = $this->buildCorporateLedger(true);
+        }
+
+        foreach ($ledger as $idx => $division)
+        {
+            $id = $division->division;
+            foreach ($division->journal as $row)
+            {
+                if (WalletJournal::where('journal_id', $row->id)->first() === null)
+                {
+                    $model = new WalletJournal();
+
+                    $model->division_id = $id;
+                    $model->journal_id = $row->id;
+                    $model->ref_type = $row->ref_type;
+                    $model->amount = $row->amount;
+                    $model->balance = $row->balance;
+                    $model->description = $row->description;
+                    $model->created_at = $row->date;
+                    $model->updated_at = $row->date;
+
+                    $model->save();
+                }
+            }
+
+            foreach ($division->transactions as $row)
+            {
+                if (WalletTransaction::where('transaction_id', $row->transaction_id)->first() === null) {
+                    $model = new WalletTransaction();
+
+                    $model->division_id = $id;
+                    $model->transaction_id = $row->transaction_id;
+                    $model->type_id = $row->type_id;
+                    $model->client_id = $row->client_id;
+                    $model->is_buy = $row->is_buy;
+                    $model->journal_ref_id = $row->journal_ref_id;
+                    $model->location_id = $row->location_id;
+                    $model->quantity = $row->quantity;
+                    $model->unit_price = $row->unit_price;
+                    $model->created_at = $row->date;
+                    $model->updated_at = $row->date;
+
+                    $model->save();
+                }
+            }
+        }
     }
 
     /**
@@ -165,7 +215,7 @@ class EsiCorporateManagement extends EsiAuthClient
      *
      * @return array
      */
-    public function updateContracts()
+    public function updateDataAccessContracts()
     {
         $contracts = $this->fetch('/latest/corporations/' . config('eve.esi.corporation') . '/contracts');
         $count = 0;
@@ -212,7 +262,7 @@ class EsiCorporateManagement extends EsiAuthClient
 
                 if ($model->save())
                 {
-                    $this->updateStationsFromContract($model);
+                    $this->updateDataAccessStationsFromContract($model);
                     ++$count;
                 } else {
                     ++$errors;
@@ -231,12 +281,12 @@ class EsiCorporateManagement extends EsiAuthClient
     }
 
     /**
-     * Update stations from c   orporate contracts.
+     * Update stations from corporate contracts.
      *
      * @param Contract $contract
      * @return void
      */
-    public function updateStationsFromContract(Contract $contract)
+    public function updateDataAccessStationsFromContract(Contract $contract)
     {
         if ($contract->type === "courier")
         {

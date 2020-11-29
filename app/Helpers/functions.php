@@ -30,6 +30,20 @@ if (!function_exists('set_status_alert_level'))
     }
 }
 
+if (!function_exists('set_positive_negative_alert_level'))
+{
+    function set_positive_negative_alert_level($value)
+    {
+        if (substr($value, 0, 1) === "-") // lmao
+        {
+            return 'alert-danger';
+        } else {
+            return 'alert-success';
+        }
+    }
+}
+
+
 function set_completed_on_text($status)
 {
     $status = strtolower($status);

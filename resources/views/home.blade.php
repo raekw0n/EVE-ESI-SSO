@@ -20,7 +20,7 @@
                                 <div class="col-12 col-sm-6 col-md-4 col-lg-2">
                                     <div class="card filter" style="height: initial;">
                                         <div class="card-body">
-                                            <h2 class="text-success">27</h2>
+                                            <h2 class="text-success">{{ $contracts }}</h2>
                                             <small>Contracts completed this week.</small>
                                         </div>
                                     </div>
@@ -28,7 +28,7 @@
                                 <div class="col-12 col-sm-6 col-md-4 col-lg-2 mt-3 mt-sm-0">
                                     <div class="card filter" style="height: initial;">
                                         <div class="card-body">
-                                            <h2 class="text-success">20</h2>
+                                            <h2 class="text-success">26</h2>
                                             <small>Happy customers this week</small>
                                         </div>
                                     </div>

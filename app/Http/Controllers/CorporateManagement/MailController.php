@@ -9,8 +9,8 @@ class MailController extends BaseController
 {
     public function index()
     {
-        if (Cache::has('evemail')) {
-            $evemail = Cache::get('evemail');
+        if (Cache::has('evemail_'.$this->esi->id)) {
+            $evemail = Cache::get('evemail_'.$this->esi->id);
         } else {
             $evemail = $this->esi->fetch('/latest/characters/'.$this->esi->id.'/mail');
             foreach ($evemail as $key => $mail)
@@ -21,7 +21,7 @@ class MailController extends BaseController
                 $evemail[$key]->is_read = $mail->is_read ?? false;
             }
 
-            Cache::put('evemail', $evemail, 1300);
+            Cache::put('evemail_'.$this->esi->id, $evemail, 1300);
         }
 
         $emails = [];

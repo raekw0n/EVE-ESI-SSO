@@ -13,6 +13,7 @@ import {
     faSignOutAlt,
     faQuestionCircle,
     faExclamationCircle,
+    faEnvelope,
     faDollarSign
 } from '@fortawesome/free-solid-svg-icons';
 
@@ -29,6 +30,7 @@ library.add(
     faSignOutAlt,
     faQuestionCircle,
     faExclamationCircle,
+    faEnvelope,
     faDollarSign
 );
 

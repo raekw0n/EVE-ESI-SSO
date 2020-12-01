@@ -31,6 +31,8 @@ Route::group(['prefix' => 'apply'], function() {
 
 Route::group(['prefix' => 'corporate'], function() {
     Route::get('management', 'CorporateManagement\HomeController@index')->name('corporate.management');
+    Route::get('mailbox', 'CorporateManagement\MailController@index')->name('corporate.mailbox');
+    Route::get('mailbox/{id}', 'CorporateManagement\MailController@view')->name('corporate.mailbox.view');
     Route::get('applications', 'CorporateManagement\ApplicationsController@index')->name('corporate.applications');
     Route::get('applications/{applicant}', 'CorporateManagement\ApplicationsController@view')->name('corporate.applications.view');
     Route::put('applications/{applicant}', 'CorporateManagement\ApplicationsController@decideApplication')->name('corporate.applications.update');

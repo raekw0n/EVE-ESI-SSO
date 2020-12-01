@@ -10993,6 +10993,10 @@ body {
   font-size: 2em;
 }
 
+.table-hover {
+  cursor: pointer;
+}
+
 .footer {
   position: absolute;
   bottom: 0;

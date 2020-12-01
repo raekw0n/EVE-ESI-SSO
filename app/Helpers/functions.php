@@ -15,15 +15,15 @@ if (!function_exists('set_status_alert_level'))
         $status = strtolower($status);
         if ($status === 'finished')
         {
-            $level = 'text-success';
+            $level = 'alert-success';
         } else if ($status === 'deleted') {
-            $level = 'text-dark';
+            $level = 'alert-dark';
         } else if($status === 'outstanding') {
-            $level = 'text-warning';
+            $level = 'alert-warning';
         } else if ($status === 'failed') {
-            $level = 'text-danger';
+            $level = 'alert-danger';
         } else {
-            $level = 'text-info';
+            $level = 'alert-info';
         }
 
         return $level;
@@ -36,9 +36,9 @@ if (!function_exists('set_positive_negative_alert_level'))
     {
         if (substr($value, 0, 1) === "-" || strtolower($value) === 'buy') // lmao
         {
-            return 'text-danger';
+            return 'alert-danger';
         } else {
-            return 'text-success';
+            return 'alert-success';
         }
     }
 }

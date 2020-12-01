@@ -27,7 +27,10 @@
                     </a>
                     <div class="dropdown-menu" aria-labelledby="corporate_management">
                         <a class="dropdown-item nav-item" href="{{ route('corporate.management') }}">Dashboard</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item nav-item" href="{{ route('corporate.mailbox') }}">Mail</a>
                         <a class="dropdown-item nav-item" href="{{ route('corporate.applications') }}">Applications</a>
+                        <div class="dropdown-divider"></div>
                         <a class="dropdown-item nav-item" href="{{ route('corporate.contracts') }}">Contracts</a>
                         <a class="dropdown-item nav-item" href="{{ route('corporate.finances') }}">Finances</a>
                         <a class="dropdown-item nav-item" href="{{ route('corporate.orders') }}">Orders</a>

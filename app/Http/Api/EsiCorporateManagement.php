@@ -24,7 +24,7 @@ class EsiCorporateManagement extends EsiAuthClient
     public $id;
 
     /** @var mixed $name */
-    private $name;
+    public $name;
 
     /** @var string $base */
     protected string $base = 'https://esi.evetech.net';

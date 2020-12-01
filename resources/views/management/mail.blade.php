@@ -1,0 +1,66 @@
+@extends('layouts.app')
+
+@section('additional_styles')
+@endsection
+
+@section('content')
+    <div id="applicant">
+        <div class="container py-2">
+            <div class="row mt-3">
+                <div class="col-12 d-flex align-items-center justify-content-between ">
+                    <h1>{{ $mail->subject }} <small class="text-muted">(from {{ $mail->from }})</small></h1>
+                    <a class="btn btn-secondary btn-sm" href="{{ route('corporate.mailbox') }}">
+                        <i class="fas fa-arrow-left"></i> Back to Mailbox
+                    </a>
+                </div>
+            </div>
+            <hr>
+            <div class="row mt-4">
+                <div class="col-12">
+                    <div class="card shadow bg-white">
+                        <div class="card-body">
+                            <form>
+                                <div class="form-row px-4">
+                                    <div class="col-12">
+                                        <label class="m-0" for="from">From:</label>
+                                        <strong>{{ $mail->from }}</strong>
+                                    </div>
+                                    <div class="col-12">
+                                        <label class="m-0" for="to">To:</label>
+                                        <strong>{{ $mail->to }}</strong>
+                                    </div>
+                                    <div class="col-12">
+                                        <label class="m-0" for="subject">Subject:</label>
+                                        <strong>{{ $mail->subject }}</strong>
+                                    </div>
+                                    <div class="col-12">
+                                        <label class="m-0" for="subject">Date:</label>
+                                        <strong>{{ date('jS F H:i', strtotime($mail->timestamp)) }}</strong>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="form-row px-4 pb-4">
+                                    <div class="col-12">
+                                        <div id="mail-message">
+                                            {!! $mail->body !!}
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection
+
+@section('additional_scripts')
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            let font = $('font');
+            font.attr('size', 'initial');
+            font.attr('color', 'black');
+        });
+    </script>
+@endsection

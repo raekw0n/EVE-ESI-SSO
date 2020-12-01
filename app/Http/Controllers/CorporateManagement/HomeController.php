@@ -14,7 +14,9 @@ class HomeController extends BaseController
      */
     public function index()
     {
-        $contracts = Contract::where('type', 'courier')->get();
+        $contracts = Contract::where('type','courier')
+            ->where('status', '!=', 'deleted')
+            ->get();
 
         $finances['ledger'] = $this->esi->buildCorporateLedger();
         $finances['total'] = 0;

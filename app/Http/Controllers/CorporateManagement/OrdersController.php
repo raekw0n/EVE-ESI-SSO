@@ -2,18 +2,25 @@
 
 namespace Mesa\Http\Controllers\CorporateManagement;
 
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\View\View;
 use Mesa\OrderHistory;
 use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
 
 class OrdersController extends BaseController
 {
+    /**
+     * @return Application|Factory|View
+     */
     public function index()
     {
         $finances['orders'] = OrderHistory::with('division')->get();
         $finances['ledger'] = $this->esi->buildCorporateLedger();
         $finances['total'] = 0;
 
-        foreach ($finances['ledger'] as $idx => $division)
+        foreach ($finances['ledger'] as $division)
         {
             $finances['total'] += $division->balance;
         }
@@ -21,7 +28,13 @@ class OrdersController extends BaseController
         return view('management.order-history', compact('finances'));
     }
 
-    public function updateOrderHistoryFromEsi(Request $request)
+    /**
+     * Update order history from the ESI.
+     *
+     * @param Request $request
+     * @return RedirectResponse
+     */
+    public function updateOrderHistoryFromEsi(Request $request): RedirectResponse
     {
         $orders = $this->esi->updateDataAccessOrderHistory();
 

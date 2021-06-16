@@ -2,13 +2,18 @@
 
 namespace Mesa\Http\Controllers\CorporateManagement;
 
-use Illuminate\Http\Request;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 use Mesa\Contract;
-use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 class ContractsController extends BaseController
 {
-
+    /**
+     * @return Application|Factory|View
+     */
     public function index()
     {
         $contracts = Contract::where('type', 'courier')->get();
@@ -21,9 +26,9 @@ class ContractsController extends BaseController
      *
      * @param Request $request
      *
-     * @return mixed
+     * @return RedirectResponse
      */
-    public function updateContractsFromEsi(Request $request)
+    public function updateContractsFromEsi(Request $request): RedirectResponse
     {
         $contracts = $this->esi->updateDataAccessContracts();
         if ($contracts['errors'] > 0)

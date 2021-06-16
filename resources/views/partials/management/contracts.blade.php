@@ -22,7 +22,10 @@
                     <div class="col-12 pb-4 d-flex align-items-center justify-content-between">
                         <form action="{{ route('corporate.contracts.update') }}" method="POST">
                             @csrf
-                            <button class="btn btn-sm btn-secondary" type="submit" id="update_contracts">Update Contracts</button>
+                            <button class="btn btn-sm btn-info" type="submit" id="update_contracts"
+                                    title="Refresh contracts from the ESI">
+                                <i class="text-white fas fa-redo-alt"></i>
+                            </button>
                         </form>
                     </div>
                 </div>

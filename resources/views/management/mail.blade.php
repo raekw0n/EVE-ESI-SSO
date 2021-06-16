@@ -7,10 +7,10 @@
     <div id="applicant">
         <div class="container py-2">
             <div class="row mt-3">
-                <div class="col-12 d-flex align-items-center justify-content-between ">
+                <div class="col-12 d-flex flex-lg-wrap align-items-center justify-content-between ">
                     <h1>{{ $mail->subject }} <small class="text-muted">(from {{ $mail->from }})</small></h1>
                     <a class="btn btn-secondary btn-sm" href="{{ route('corporate.mailbox') }}">
-                        <i class="fas fa-arrow-left"></i> Back to Mailbox
+                        <i class="fas fa-arrow-left"></i> Back to mailbox
                     </a>
                 </div>
             </div>

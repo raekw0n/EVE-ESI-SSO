@@ -3,14 +3,12 @@
 namespace Mesa\Http\Api;
 
 use Log;
-use Cache;
-use Mesa\OrderHistory;
-use Mesa\Region;
 use Mesa\Station;
 use Mesa\Contract;
-use Mesa\Http\Api\Clients\EsiAuthClient;
+use Mesa\OrderHistory;
 use Mesa\WalletJournal;
 use Mesa\WalletTransaction;
+use Mesa\Http\Api\Clients\EsiAuthClient;
 
 /**
  * ESI Corporate Management.
@@ -62,7 +60,7 @@ class EsiCorporateManagement extends EsiAuthClient
             array_shift($divisions);
             array_shift($balances);
 
-            foreach ($divisions as $i => $division)
+            foreach ($divisions as $division)
             {
                 foreach ($balances as $x => $balance)
                 {
@@ -110,7 +108,7 @@ class EsiCorporateManagement extends EsiAuthClient
 
         if (!is_null($type))
         {
-            $divisions = isset($divisions->{$type}) ? $divisions->{$type} : $divisions;
+            $divisions = $divisions->{$type} ?? $divisions;
         }
 
         return $divisions;
@@ -171,7 +169,7 @@ class EsiCorporateManagement extends EsiAuthClient
      *
      * @param mixed $orders
      */
-    public function updateDataAccessOrderHistory($orders = null)
+    public function updateDataAccessOrderHistory($orders = null): array
     {
         if (is_null($orders))
         {
@@ -241,7 +239,7 @@ class EsiCorporateManagement extends EsiAuthClient
             $ledger = $this->buildCorporateLedger(true);
         }
 
-        foreach ($ledger as $idx => $division)
+        foreach ($ledger as $division)
         {
             $id = $division->division;
             foreach ($division->journal as $row)
@@ -291,7 +289,7 @@ class EsiCorporateManagement extends EsiAuthClient
      *
      * @return array
      */
-    public function updateDataAccessContracts()
+    public function updateDataAccessContracts(): array
     {
         $contracts = $this->fetch('/latest/corporations/' . config('eve.esi.corporation') . '/contracts');
         $count = 0;
@@ -370,12 +368,12 @@ class EsiCorporateManagement extends EsiAuthClient
             $end_id = $contract->end_location_id;
 
             $stations = [];
-            if (is_32bit_signed_int((int)$start_id))
+            if (is_32bit_signed_int($start_id))
             {
                 $stations[] = $this->fetch('/latest/universe/stations/' . $start_id);
             }
 
-            if (is_32bit_signed_int((int)$end_id))
+            if (is_32bit_signed_int($end_id))
             {
                 $stations[] = $this->fetch('/latest/universe/stations/' . $end_id);
             }

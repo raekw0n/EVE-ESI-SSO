@@ -2,15 +2,16 @@
 
 namespace Mesa\Http\Controllers\CorporateManagement;
 
+use Illuminate\Contracts\View\Factory;
+use Illuminate\View\View;
 use Mesa\Application;
 use Mesa\Contract;
+use Mesa\Http\Api\EsiCorporateManagement;
 
 class HomeController extends BaseController
 {
     /**
-     * Render the management homepage.
-     *
-     * @return mixed
+     * @return \Illuminate\Contracts\Foundation\Application|Factory|View
      */
     public function index()
     {
@@ -21,7 +22,7 @@ class HomeController extends BaseController
         $finances['ledger'] = $this->esi->buildCorporateLedger();
         $finances['total'] = 0;
 
-        foreach ($finances['ledger'] as $idx => $division)
+        foreach ($finances['ledger'] as $division)
         {
             $finances['total'] += $division->balance;
         }

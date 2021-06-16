@@ -2,19 +2,25 @@
 
 namespace Mesa\Http\Controllers\CorporateManagement;
 
-use Mesa\OrderHistory;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\View\View;
 use Mesa\WalletJournal;
 use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
 
 class FinanceController extends BaseController
 {
+    /**
+     * @return Application|Factory|View
+     */
     public function index()
     {
         $finances['ledger'] = $this->esi->buildCorporateLedger();
         $finances['journal'] = WalletJournal::with('division')->get();
         $finances['total'] = 0;
 
-        foreach ($finances['ledger'] as $idx => $division)
+        foreach ($finances['ledger'] as $division)
         {
             $finances['total'] += $division->balance;
         }
@@ -22,7 +28,13 @@ class FinanceController extends BaseController
         return view('management.finances', compact('finances'));
     }
 
-    public function updateJournalTransactionsFromEsi(Request $request)
+    /**
+     * Update journal transactions from the ESI.
+     *
+     * @param Request $request
+     * @return RedirectResponse
+     */
+    public function updateJournalTransactionsFromEsi(Request $request): RedirectResponse
     {
         $this->esi->updateDataAccessJournalTransactions();
 

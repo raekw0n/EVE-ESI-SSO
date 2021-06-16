@@ -14,7 +14,9 @@ import {
     faQuestionCircle,
     faExclamationCircle,
     faEnvelope,
-    faDollarSign
+    faDollarSign,
+    faRedo,
+    faRedoAlt
 } from '@fortawesome/free-solid-svg-icons';
 
 library.add(
@@ -31,7 +33,9 @@ library.add(
     faQuestionCircle,
     faExclamationCircle,
     faEnvelope,
-    faDollarSign
+    faDollarSign,
+    faRedo,
+    faRedoAlt
 );
 
 dom.watch();

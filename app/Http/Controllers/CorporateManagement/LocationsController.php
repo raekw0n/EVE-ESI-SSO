@@ -3,9 +3,9 @@
 namespace Mesa\Http\Controllers\CorporateManagement;
 
 use Illuminate\Http\JsonResponse;
-use Mesa\{Http\Controllers\Controller, Region, Constellation, System, Stargate, Station};
+use Mesa\{Region, Constellation, System, Station};
 
-class LocationsController extends Controller
+class LocationsController
 {
     /** @var array|string[] $mappings */
     protected static array $mappings = [
@@ -22,7 +22,7 @@ class LocationsController extends Controller
      * @param null $id
      * @return JsonResponse
      */
-    public function fetchLocationsFromDataAccess($type, $id = null)
+    public function fetchLocationsFromDataAccess($type, $id = null): JsonResponse
     {
         if (isset(static::$mappings[$type]))
         {

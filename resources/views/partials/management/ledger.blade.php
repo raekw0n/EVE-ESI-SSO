@@ -22,7 +22,10 @@
                     <div class="col-12 pb-4 d-flex align-items-center justify-content-between">
                         <form action="{{ route('corporate.finances.update') }}" method="POST">
                             @csrf
-                            <button class="btn btn-sm btn-secondary" type="submit" id="update_finances">Update Ledger</button>
+                            <button class="btn btn-sm btn-info" type="submit" id="update_finances"
+                                    title="Refresh transaction history from the ESI">
+                                <i class="text-white fas fa-redo-alt"></i>
+                            </button>
                         </form>
                     </div>
                 </div>
@@ -48,7 +51,9 @@
                                                 </span>
                             </td>
                             <td>{{ date('jS M H:i:s', strtotime($row->created_at)) }}</td>
-                            <td>{{ number_format($row->amount, 2) }} ISK</td>
+                            <td class="alert-{{ $row->amount > 0 ? 'success' : 'danger' }}">
+                                {{ number_format($row->amount, 2) }} ISK
+                            </td>
                             <td>{{ number_format($row->balance, 2) }} ISK</td>
                         </tr>
                     @endforeach

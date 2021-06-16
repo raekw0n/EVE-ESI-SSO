@@ -2,11 +2,17 @@
 
 namespace Mesa\Http\Controllers\CorporateManagement;
 
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 use Mesa\Application;
 
 class ApplicationsController extends BaseController
 {
+    /**
+     * @return \Illuminate\Contracts\Foundation\Application|Factory|View
+     */
     public function index()
     {
         $applications = Application::all();
@@ -14,18 +20,37 @@ class ApplicationsController extends BaseController
         return view('management.applications', compact('applications'));
     }
 
+    /**
+     * View character application.
+     *
+     * @param Application $applicant
+     * @return \Illuminate\Contracts\Foundation\Application|Factory|View
+     */
     public function view(Application $applicant)
     {
         $applicant->character_raw_data = json_decode($applicant->character_raw_data);
-//        dd($applicant->character_raw_data->corporation_history);
+
         return view('management.application', compact('applicant'));
     }
 
-    public function decideApplication(Application $applicant, Request $request)
+    /**
+     * Decide character application.
+     *
+     * @param Application $applicant
+     * @param Request $request
+     * @return RedirectResponse
+     */
+    public function decideApplication(Application $applicant, Request $request): RedirectResponse
     {
-        $applicant->status = $request->status;
+        if (!$request->get('status')) {
+            $request->session()->flash('error', 'No decision has been passed.');
+
+            return redirect()->back();
+        }
+
+        $applicant->status = $request->get('status');
         $applicant->save();
 
-        redirect()->route('corporate.applications');
+        return redirect()->route('corporate.applications');
     }
 }
